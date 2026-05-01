@@ -3,8 +3,6 @@
 per-item engagement coefficient ψ on observational recommender-system logs.
 75M (u, i, t) interactions, short-form video + news/text.
 
-submitted to NeurIPS 2026 Evaluations & Datasets track.
-
 ## What is ψ
 
 ψ(u, i, t) = c · (1 + R̃_norm) / K(i)
