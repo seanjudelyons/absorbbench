@@ -1,0 +1,36 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# venvs
+.venv/
+venv/
+env/
+
+# data — corpus is built from source; don't commit
+corpus/
+datasets/
+*.parquet
+*.tgz
+*.tar.gz
+
+# notebooks scratch
+.ipynb_checkpoints/
+
+# os / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# results from local runs
+results/
+logs/
+*.log
