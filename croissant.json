@@ -1,0 +1,198 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
+  },
+  "@type": "sc:Dataset",
+  "name": "AbsorbBench (Track A redistributed shards)",
+  "description": "Track A of the AbsorbBench corpus: KuaiRand-Pure (CC BY-SA 4.0; 2,622,668 short-form video interactions) and KuaiRec (CC BY 4.0; 4,676,570 forced-exposure short-form video interactions), redistributed as parquet shards with the per-item engagement coefficient psi(u, i, t) = c * (1 + R_norm) / H(i) pre-computed for every (u, i, t) tuple. Track B (Tenrec QK-article, QB-video, QK-video; CC BY-NC 4.0 with portal license-acceptance wrapper) is not redistributed; it ships as a build-from-source pipeline at the GitHub repository.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "url": "https://doi.org/10.5281/zenodo.19965136",
+  "version": "1.0.0",
+  "datePublished": "2026-05-02",
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "Sean Lyons",
+      "url": "https://orcid.org/0009-0007-8518-0504",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Australian National University"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Marcus Hutter",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Australian National University"
+      }
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zenodo",
+    "url": "https://zenodo.org/"
+  },
+  "keywords": [
+    "recommender systems",
+    "dataset benchmark",
+    "engagement-quality estimation",
+    "observational logs",
+    "cold-start prediction",
+    "per-item engagement coefficient"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "isLiveDataset": false,
+  "citeAs": "Lyons, S., & Hutter, M. (2026). AbsorbBench (Track A redistributed shards): KuaiRand-Pure + KuaiRec parquet with per-item engagement coefficient psi (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.19965136",
+  "sameAs": [
+    "https://github.com/seanjudelyons/absorbbench"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "kuairand_pure-parquet",
+      "name": "kuairand_pure.parquet",
+      "description": "KuaiRand-Pure (CC BY-SA 4.0): 2,622,668 short-form video (u, i, t) interactions on Kuaishou with per-row engagement coefficient psi pre-computed.",
+      "contentUrl": "https://zenodo.org/records/19965136/files/kuairand_pure.parquet",
+      "encodingFormat": "application/vnd.apache.parquet",
+      "sha256": "4592bfcce2c358c9f83df23f07a18ce51f4ab09f5454826936bc992c8b0ee330",
+      "contentSize": "64864639 B"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "kuairec-parquet",
+      "name": "kuairec.parquet",
+      "description": "KuaiRec (CC BY 4.0): 4,676,570 forced-exposure short-form video (u, i, t) interactions on Kuaishou with per-row engagement coefficient psi pre-computed.",
+      "contentUrl": "https://zenodo.org/records/19965136/files/kuairec.parquet",
+      "encodingFormat": "application/vnd.apache.parquet",
+      "sha256": "b88a3278a3b3c9ac47a0dfa41c8fce557a97febf5711240ec59481473903db1b",
+      "contentSize": "114471263 B"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "kuairand_pure-records",
+      "name": "kuairand_pure",
+      "description": "One row per (u, i, t) tuple in the KuaiRand-Pure shard.",
+      "field": [
+        {"@type": "cr:Field", "@id": "kuairand_pure/user_id", "name": "user_id", "description": "Namespaced user identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "user_id"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/item_id", "name": "item_id", "description": "Namespaced item identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "item_id"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/modality", "name": "modality", "description": "short_video for this shard.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "modality"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/dataset_source", "name": "dataset_source", "description": "Source dataset label (kuairand_pure).", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "dataset_source"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/timestamp", "name": "timestamp", "description": "Encounter timestamp.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "timestamp"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/position", "name": "position", "description": "Within-session encounter position.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "position"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/c", "name": "c", "description": "Engagement-time fraction T_engaged / T_total in [0, 1].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "c"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/R_count", "name": "R_count", "description": "Per-(u, i, t) reflective-act count, integer >= 0.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "R_count"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/K_raw", "name": "K_raw", "description": "Pre-floor per-item content entropy in bits (Shannon).", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "K_raw"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/K", "name": "K", "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "K"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/R_norm", "name": "R_norm", "description": "Reflective intensity in [0, 1] = min(R_count, R_p90_modality) / R_p90_modality.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "R_norm"}}},
+        {"@type": "cr:Field", "@id": "kuairand_pure/psi", "name": "psi", "description": "Per-encounter engagement coefficient c*(1+R_norm)/K, bounded in [0, 2].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "psi"}}}
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "kuairec-records",
+      "name": "kuairec",
+      "description": "One row per (u, i, t) tuple in the KuaiRec shard.",
+      "field": [
+        {"@type": "cr:Field", "@id": "kuairec/user_id", "name": "user_id", "description": "Namespaced user identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "user_id"}}},
+        {"@type": "cr:Field", "@id": "kuairec/item_id", "name": "item_id", "description": "Namespaced item identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "item_id"}}},
+        {"@type": "cr:Field", "@id": "kuairec/modality", "name": "modality", "description": "short_video for this shard.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "modality"}}},
+        {"@type": "cr:Field", "@id": "kuairec/dataset_source", "name": "dataset_source", "description": "Source dataset label (kuairec).", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "dataset_source"}}},
+        {"@type": "cr:Field", "@id": "kuairec/timestamp", "name": "timestamp", "description": "Encounter timestamp.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "timestamp"}}},
+        {"@type": "cr:Field", "@id": "kuairec/position", "name": "position", "description": "Within-session encounter position.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "position"}}},
+        {"@type": "cr:Field", "@id": "kuairec/c", "name": "c", "description": "Engagement-time fraction T_engaged / T_total in [0, 1].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "c"}}},
+        {"@type": "cr:Field", "@id": "kuairec/R_count", "name": "R_count", "description": "Per-(u, i, t) reflective-act count, integer >= 0.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "R_count"}}},
+        {"@type": "cr:Field", "@id": "kuairec/K_raw", "name": "K_raw", "description": "Pre-floor per-item content entropy in bits (Shannon).", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "K_raw"}}},
+        {"@type": "cr:Field", "@id": "kuairec/K", "name": "K", "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "K"}}},
+        {"@type": "cr:Field", "@id": "kuairec/R_norm", "name": "R_norm", "description": "Reflective intensity in [0, 1] = min(R_count, R_p90_modality) / R_p90_modality.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "R_norm"}}},
+        {"@type": "cr:Field", "@id": "kuairec/psi", "name": "psi", "description": "Per-encounter engagement coefficient c*(1+R_norm)/K, bounded in [0, 2].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "psi"}}}
+      ]
+    }
+  ],
+  "rai:dataCollection": "Source datasets KuaiRand-Pure and KuaiRec were downloaded from their official portals (https://kuairand.com, https://kuairec.com). The AbsorbBench build pipeline computes psi per the closed-form expression and writes per-shard parquet files with sha256-stable manifests. Source dataset time frames: KuaiRand-Pure 8 days in April 2022; KuaiRec 8 days in 2022. AbsorbBench performs only post-hoc computation on already-public data and does not collect new human-subject data.",
+  "rai:dataPreprocessingProtocol": "Per-modality signal extraction maps source columns to a unified schema. Engagement-time fraction c = play_time / video_duration. Reflective intensity R_norm = min(R_count, R_p90_modality) / R_p90_modality, capped at 1. Content entropy H(i) = -log_2 P(tag(i) | modality) with a 1-bit floor (R1). psi(u, i, t) = c * (1 + R_norm) / H(i), bounded in [0, 2].",
+  "rai:dataAnnotationProtocol": "No human annotation was performed. psi is a closed-form computation over per-(u, i, t) signals available in the source datasets.",
+  "rai:dataAnnotationPlatform": "N/A. psi is computed by a deterministic pipeline; no annotation platform is involved.",
+  "rai:dataAnnotationAnalysis": "N/A. psi is deterministic; no inter-annotator agreement applies.",
+  "rai:personalSensitiveInformation": "None. Source datasets are de-identified by the publishers (KuaiRand and KuaiRec). User and item identifiers are namespaced opaque tokens; no demographic, behavioural, or content information that could re-identify users is retained.",
+  "rai:dataSocialImpact": "Net-positive for transparent recommender-system research: makes per-item engagement-quality estimation accessible to researchers without proprietary platform logs. Risk: uncritical operationalisation of psi as a deployment objective could reinforce engagement-maximising platform behaviour. We recommend pairing the corpus with separate platform-specific validation before any deployed-system application.",
+  "rai:dataBiases": [
+    "Ranker-served selection bias: the encounter set on KuaiRand-Pure is determined by the platform's ranker. KuaiRand-Pure ships a random-exposure subset alongside the ranker-served slice; cross-slice persistence (F4 in the paper) bounds this confounding.",
+    "Forced-exposure bias on KuaiRec: KuaiRec is a fully-observed every-user-by-every-item interaction matrix obtained by directing users to a specific feed for a fixed period. This is closer to randomised exposure than typical observational logs but introduces a different bias: users were aware they were participating.",
+    "Platform and language scope: both shards are from Kuaishou (short-form video), serving primarily Chinese-language users in 2022. psi distributions may not generalise to other platforms, languages, or eras.",
+    "Tag-distribution bias in H(i): per-modality content entropy is computed under the source dataset's empirical tag marginal. Items in different distributional contexts would receive different H values."
+  ],
+  "rai:dataLimitations": "Two platforms (Kuaishou KuaiRand-Pure + KuaiRec), one language (Chinese), one modality (short-form video) for this Track-A deposit. The corpus's text/news modality (Tenrec QK-article) is shipped as a build-from-source pipeline, not redistributed here. Cross-modality numeric psi comparison requires modality-relative normalisation and is not supported by this Track-A deposit alone.",
+  "rai:dataUseCases": [
+    "Per-item engagement-coefficient prediction across three split protocols (held-out items, users, time).",
+    "Cold-start estimation: psi is well-defined and informative on items with few or zero training-set encounters, where count-based popularity is rank-degenerate.",
+    "Engagement-quality vs engagement-volume calibration: psi distinguishes per-item engagement-quality from raw count statistics.",
+    "Counterfactual evaluation using KuaiRand-Pure's random-exposure slice."
+  ],
+  "rai:dataReleaseMaintenancePlan": "Maintained by the authors via the public GitHub issue tracker at https://github.com/seanjudelyons/absorbbench. Updates that change psi values (e.g., new H(i) estimators) bump the major version and ship as a separate Zenodo deposit; the prior version remains accessible via the Zenodo concept-DOI. Errata tracked in ERRATA.md.",
+  "rai:dataIsSyntheticTesting": false,
+  "rai:dataIsAIGenerated": false,
+  "rai:provenance": [
+    {
+      "@type": "Dataset",
+      "name": "KuaiRand-Pure",
+      "url": "https://kuairand.com",
+      "identifier": "10.1145/3543507.3583240",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    {
+      "@type": "Dataset",
+      "name": "KuaiRec",
+      "url": "https://kuairec.com",
+      "identifier": "10.1145/3477495.3531879",
+      "license": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ]
+}
