@@ -17,7 +17,7 @@ per-item engagement coefficient ψ on observational recommender-system logs.
 
 ```
 corpus_build/   parquet build pipeline (kuairand-pure, tenrec qk-article, + 3 appendix shards)
-baselines/      trivial, popularity, mlp, sasrec, bert4rec, linucrl, falsifiability F1-F5
+baselines/      trivial, popularity, mlp, sasrec, bert4rec, linucrl, falsifiability F1-F6
 tests/          corpus invariant smoke tests
 ```
 
@@ -52,13 +52,16 @@ python -m baselines.mlp_tabular --shard corpus/spine/kuairand_pure.parquet --spl
 
 linucrl/sasrec/bert4rec take longer (gpu recommended for sasrec + bert4rec on tenrec).
 
-falsifiability F1-F5 are cpu-only and run in a few minutes per shard:
+falsifiability F1-F6 are cpu-only and run in a few minutes per shard:
 
 ```
-python -m baselines.falsifiability_F1_user_half --corpus corpus/
+python -m baselines.falsifiability_F1_user_half --shard corpus/spine/tenrec_qk_article.parquet
+python -m baselines.falsifiability_F6_coldstart_ramp --shard corpus/spine/tenrec_qk_article.parquet
 ```
 
-verdict structure (binding, see preregistration §4): 4-5 of 5 pass = strong; 2-3 = moderate; 0-1 = withdrawn.
+F6 (cold-start informativeness ramp, added 2026-05-02) reports the split-half Spearman ρ on ψᵢ within encounter-count buckets and the intra-class correlation ICC(1, k) of the ψᵢ mean as a function of k encounters. Closes the "n=1 is just noise" question for cold-start items: on Tenrec QK-article, ICC(1, 1) = 0.81 and split-half ρ exceeds 0.67 from n = 2.
+
+F1-F6 are reported as stability-and-overlap analyses, not as falsifiability gates that bind a construct claim. The construct claim was withdrawn pre-release per the binding pre-registration; ψᵢ ships as a per-item engagement coefficient with documented stability and documented overlap with popularity.
 
 ## Status
 
