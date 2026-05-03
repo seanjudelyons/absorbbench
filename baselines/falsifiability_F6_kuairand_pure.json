@@ -1,0 +1,174 @@
+{
+  "shard": "corpus/spine/kuairand_pure.parquet",
+  "test": "F6_coldstart_ramp",
+  "seed": 0,
+  "n_items_total": 7583,
+  "n_per_item_distribution": {
+    "count": 7583.0,
+    "mean": 345.8615323750495,
+    "std": 434.66412241563177,
+    "min": 3.0,
+    "50%": 218.0,
+    "75%": 337.0,
+    "90%": 627.0,
+    "99%": 2063.060000000005,
+    "max": 10515.0
+  },
+  "icc": {
+    "n_items_for_icc": 7583,
+    "sigma_between": 0.004902054213231807,
+    "sigma_within_mean": 0.017317652369303205,
+    "snr_between_over_within": 0.283066902412307,
+    "icc_1_1": 0.2206174143219734,
+    "icc_1_5": 0.5859786729306987,
+    "icc_1_10": 0.7389489946266179,
+    "icc_1_30": 0.8946482032329123
+  },
+  "bucket_curve": [
+    {
+      "bucket": "n=2",
+      "n_lo": 2,
+      "n_hi": 2,
+      "n_items": 0,
+      "spearman_rho_psi": null,
+      "spearman_rho_count": null
+    },
+    {
+      "bucket": "n=3",
+      "n_lo": 3,
+      "n_hi": 3,
+      "n_items": 1,
+      "spearman_rho_psi": null,
+      "spearman_rho_count": null
+    },
+    {
+      "bucket": "n=[4,5]",
+      "n_lo": 4,
+      "n_hi": 5,
+      "n_items": 1,
+      "spearman_rho_psi": null,
+      "spearman_rho_count": null
+    },
+    {
+      "bucket": "n=[6,10]",
+      "n_lo": 6,
+      "n_hi": 10,
+      "n_items": 2,
+      "spearman_rho_psi": null,
+      "spearman_rho_count": null
+    },
+    {
+      "bucket": "n=[11,30]",
+      "n_lo": 11,
+      "n_hi": 30,
+      "n_items": 24,
+      "spearman_rho_psi": null,
+      "spearman_rho_count": null
+    },
+    {
+      "bucket": "n=[31,100]",
+      "n_lo": 31,
+      "n_hi": 100,
+      "n_items": 117,
+      "spearman_rho_psi": 0.7733444229645281,
+      "p_value_psi": 1.655712859657306e-24,
+      "spearman_rho_count": 0.9987338481020204,
+      "p_value_count": 3.6102107725008964e-151,
+      "count_unique_values": 33
+    },
+    {
+      "bucket": "n=[101,1000000000]",
+      "n_lo": 101,
+      "n_hi": 1000000000,
+      "n_items": 7438,
+      "spearman_rho_psi": 0.9574708035041729,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": 0.9998171691775525,
+      "p_value_count": 0.0,
+      "count_unique_values": 689
+    }
+  ],
+  "first_bucket_psi_rho_ge_0.5": "n=[31,100]",
+  "cold_vs_warm_distinctness": {
+    "distinctness_skipped": "insufficient cold or warm items",
+    "n_cold": 0,
+    "n_warm": 7556
+  },
+  "numerator_only_sanity_check": {
+    "description": "Same ICC and split-half ramp on noesis = c * (1 + R_norm), with H(i) divided out. Tests whether the cold-start informativeness claim depends on the constant 1/H(i) factor per item or on the user-side average alone.",
+    "icc": {
+      "n_items_for_icc": 7583,
+      "sigma_between": 0.06349724579676497,
+      "sigma_within_mean": 0.2673975039032844,
+      "snr_between_over_within": 0.23746386884647747,
+      "icc_1_1": 0.1918955977824495,
+      "icc_1_5": 0.5428193863704261,
+      "icc_1_10": 0.7036719802276283,
+      "icc_1_30": 0.87690665536788
+    },
+    "bucket_curve": [
+      {
+        "bucket": "n=2",
+        "n_lo": 2,
+        "n_hi": 2,
+        "n_items": 0,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=3",
+        "n_lo": 3,
+        "n_hi": 3,
+        "n_items": 1,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[4,5]",
+        "n_lo": 4,
+        "n_hi": 5,
+        "n_items": 1,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[6,10]",
+        "n_lo": 6,
+        "n_hi": 10,
+        "n_items": 2,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[11,30]",
+        "n_lo": 11,
+        "n_hi": 30,
+        "n_items": 24,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[31,100]",
+        "n_lo": 31,
+        "n_hi": 100,
+        "n_items": 117,
+        "spearman_rho_psi": 0.7792241364790166,
+        "p_value_psi": 4.386261972772033e-25,
+        "spearman_rho_count": 0.9987338481020204,
+        "p_value_count": 3.6102107725008964e-151,
+        "count_unique_values": 33
+      },
+      {
+        "bucket": "n=[101,1000000000]",
+        "n_lo": 101,
+        "n_hi": 1000000000,
+        "n_items": 7438,
+        "spearman_rho_psi": 0.9536712844701546,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9998171691775525,
+        "p_value_count": 0.0,
+        "count_unique_values": 689
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+  "test": "F4_cross_slice",
+  "skipped": "F4 only applies to KuaiRand-Pure (random + served slices)"
+}

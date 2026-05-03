@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 
-# word boundary that handles danish letters æøå plus standard ascii.
+# Word boundary that handles Danish letters æøå plus standard ASCII.
 _WORD_RE = re.compile(r"\b[\wÆØÅæøå]+\b", re.UNICODE)
 _SENT_RE = re.compile(r"[.!?]+")
 

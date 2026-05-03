@@ -54,7 +54,7 @@ from corpus_build.extractors import (
 from corpus_build.psi import SCHEMA_COLS
 
 CORPUS_OUT = ROOT / "corpus"
-QK_VIDEO_SAMPLE_SIZE = 20_000_000  # 20m rows from 493m for ≤50gb target
+QK_VIDEO_SAMPLE_SIZE = 20_000_000  # 20M rows from 493M for ≤50GB target
 
 
 def file_sha256(p: Path) -> str:
@@ -67,7 +67,7 @@ def file_sha256(p: Path) -> str:
 
 def write_shard(df: pd.DataFrame, out_path: Path, label: str) -> dict:
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    # stable sort for determinism
+    # Stable sort for determinism
     df = df.sort_values(["dataset_source", "user_id", "position"]).reset_index(drop=True)
     df = df[SCHEMA_COLS]
     t0 = time.time()
@@ -151,7 +151,7 @@ def write_manifest(out_root: Path, shards: list, full: bool) -> Path:
         "version": "0.1.0-phase2-pilot",
         "build_timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "build_mode": "full" if full else "smoke",
-        "psi_formula_source": "mathmatical_proof/mp_00_psi_derivation.md §10",
+        "psi_formula_source": "research_notes/mp_00_psi_derivation.md §10",
         "schema_columns": SCHEMA_COLS,
         "total_rows": total_rows,
         "total_size_bytes": total_size,
@@ -166,7 +166,7 @@ def write_manifest(out_root: Path, shards: list, full: bool) -> Path:
             "Tenrec-QB-video",
             "Tenrec-QK-video",
         ],
-        "phase1_findings_ref": "mathmatical_proof/mp_05a_phase1_findings.md",
+        "phase1_findings_ref": "research_notes/mp_05a_phase1_findings.md",
         "construct_validity_status": "withdrawn per mp_03 §7; pillar 4 reframes to orthogonality-evidence",
         "modalities_in_corpus": ["short_video", "text_news"],
         "permanently_dropped": [

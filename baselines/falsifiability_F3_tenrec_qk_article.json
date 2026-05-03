@@ -1,0 +1,16 @@
+{
+  "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+  "test": "F3_shape_differential",
+  "min_encounters": 30,
+  "n_items": 79210,
+  "raw_spearman_psi_vs_high_completion": 0.565324332953462,
+  "partial_spearman_psi_vs_high_completion_given_click_rate": 0.2630098386353074,
+  "p_value": 0.0,
+  "threshold": 0.4,
+  "verdict": "FAIL",
+  "click_rate_summary": {
+    "mean": 0.9647804161787578,
+    "min": 0.0,
+    "max": 1.0
+  }
+}

@@ -55,10 +55,10 @@ def _build_satiation_features(df: pd.DataFrame, K: int = 10) -> tuple[sparse.csr
     df = df.sort_values(["user_id", "position"]).reset_index(drop=True)
     n = len(df)
 
-    # pre-compute median k within the dataset to define hi/lo bins
+    # Pre-compute median K within the dataset to define hi/lo bins
     median_K = float(df["K"].median())
 
-    # vectorised history features per user via groupby + rolling
+    # Vectorised history features per user via groupby + rolling
     log_K = np.log1p(df["K"].to_numpy())
 
     out = {
@@ -66,7 +66,7 @@ def _build_satiation_features(df: pd.DataFrame, K: int = 10) -> tuple[sparse.csr
         "K_self": df["K"].to_numpy(),
     }
 
-    # per-user rolling history (last k items, not including current)
+    # Per-user rolling history (last K items, NOT including current)
     rec_same_K = np.zeros(n, dtype=np.float32)
     rec_hi_K = np.zeros(n, dtype=np.float32)
     rec_lo_K = np.zeros(n, dtype=np.float32)
@@ -77,9 +77,9 @@ def _build_satiation_features(df: pd.DataFrame, K: int = 10) -> tuple[sparse.csr
     K_arr = df["K"].to_numpy()
     psi_arr = df["psi"].to_numpy()
 
-    # group offsets
+    # Group offsets
     user_ids = df["user_id"].to_numpy()
-    # find user-group boundaries
+    # Find user-group boundaries
     bounds = [0]
     for i in range(1, n):
         if user_ids[i] != user_ids[i - 1]:
@@ -151,7 +151,7 @@ def run(shard_path: Path | str, split: str = "items", seed: int = 0,
         return {"shard": str(shard_path), "split": split, "seed": seed,
                 "n_test": int(len(test)), "skipped": "test or train too small"}
 
-    # build features per row (per-user history within the train+test concat,
+    # Build features per row (per-user history within the train+test concat,
     # respecting time order; mask leaks no test info because history is built
     # from prior positions only).
     full = pd.concat([train.assign(_split="train"), test.assign(_split="test")], ignore_index=True)
@@ -166,8 +166,8 @@ def run(shard_path: Path | str, split: str = "items", seed: int = 0,
     X_test = X[test_mask]
     y_test = y[test_mask]
 
-    # solve via least-squares with small ridge
-    # closed-form: w = (x^t x + λi)^-1 x^t y
+    # Solve via least-squares with small ridge
+    # Closed-form: w = (X^T X + λI)^-1 X^T y
     A = X_train.T @ X_train
     A = A.toarray() + 1e-3 * np.eye(A.shape[0])
     b = X_train.T @ y_train

@@ -1,0 +1,12 @@
+{
+  "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+  "test": "F1_user_half",
+  "min_encounters": 30,
+  "n_items": 79210,
+  "spearman_rho": 0.9966055846842607,
+  "pearson_r": 0.9959833518504284,
+  "p_value": 0.0,
+  "threshold": 0.5,
+  "verdict": "PASS",
+  "median_n_per_item": 150.0
+}

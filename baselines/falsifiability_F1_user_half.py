@@ -29,9 +29,17 @@ def run(shard_path: Path | str, min_encounters: int = 30, seed: int = 0,
     df = pd.read_parquet(shard_path)
     rng = np.random.default_rng(seed)
 
-    # per-item: split encounters into two halves
-    item_psi_a = {}
-    item_psi_b = {}
+    # noesis_arr column: c * (1 + R_norm), the user-side term with H(i)
+    # divided out. Reviewer-flagged sanity check: F1 on full psi may be
+    # dominated by the constant 1/H(i) factor per item; computing the same
+    # within-item user-half consistency on noesis-only isolates whether the
+    # *user-side* average is stable across user halves.
+    df = df.assign(noesis=df["c"] * (1.0 + df["R_norm"]))
+
+    # Per-item: split encounters into two halves; compute both psi means
+    # and noesis means on each half.
+    item_psi_a, item_psi_b = {}, {}
+    item_noesis_a, item_noesis_b = {}, {}
     item_n = {}
     for item_id, grp in df.groupby("item_id", sort=False):
         if len(grp) < min_encounters:
@@ -39,8 +47,11 @@ def run(shard_path: Path | str, min_encounters: int = 30, seed: int = 0,
         idx = rng.permutation(len(grp))
         half = len(idx) // 2
         psi_arr = grp["psi"].to_numpy()
+        noesis_arr = grp["noesis"].to_numpy()
         item_psi_a[item_id] = float(psi_arr[idx[:half]].mean())
         item_psi_b[item_id] = float(psi_arr[idx[half:]].mean())
+        item_noesis_a[item_id] = float(noesis_arr[idx[:half]].mean())
+        item_noesis_b[item_id] = float(noesis_arr[idx[half:]].mean())
         item_n[item_id] = len(grp)
 
     if len(item_psi_a) < 30:
@@ -52,17 +63,27 @@ def run(shard_path: Path | str, min_encounters: int = 30, seed: int = 0,
     rho, p = stats.spearmanr(a, b)
     pearson, _ = stats.pearsonr(a, b)
 
+    a_noesis = pd.Series(item_noesis_a)
+    b_noesis = pd.Series(item_noesis_b)
+    rho_noesis, p_noesis = stats.spearmanr(a_noesis, b_noesis)
+    pearson_noesis, _ = stats.pearsonr(a_noesis, b_noesis)
+
     verdict = "PASS" if rho >= 0.5 else "FAIL"
+    verdict_noesis = "PASS" if rho_noesis >= 0.5 else "FAIL"
     return {
         "shard": str(shard_path),
         "test": "F1_user_half",
         "min_encounters": min_encounters,
         "n_items": len(item_psi_a),
-        "spearman_rho": float(rho),
-        "pearson_r": float(pearson),
-        "p_value": float(p),
+        "spearman_rho_psi": float(rho),
+        "pearson_r_psi": float(pearson),
+        "p_value_psi": float(p),
+        "spearman_rho_noesis": float(rho_noesis),
+        "pearson_r_noesis": float(pearson_noesis),
+        "p_value_noesis": float(p_noesis),
         "threshold": 0.5,
-        "verdict": verdict,
+        "verdict_psi": verdict,
+        "verdict_noesis": verdict_noesis,
         "median_n_per_item": float(pd.Series(item_n).median()),
     }
 

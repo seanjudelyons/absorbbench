@@ -1,0 +1,21 @@
+{
+  "test": "F4_canonical (is_rand merged from source CSVs)",
+  "shard": "/Users/seanlyons/Downloads/Phil Tech/corpus/spine/kuairand_pure.parquet",
+  "matched_rows": 2669838,
+  "matched_fraction": 1.0,
+  "rows_random_slice": 1186079,
+  "rows_served_slice": 1483759,
+  "min_encounters_per_slice": 10,
+  "n_items_random_ge_10": 7467,
+  "n_items_served_ge_10": 6749,
+  "n_items_intersection": 6638,
+  "pearson_r": 0.6790132827219105,
+  "spearman_rho": 0.5747023540702024,
+  "p_value_pearson": 0.0,
+  "threshold": 0.6,
+  "verdict": "PASS",
+  "psi_rand_mean": 0.046902317238612205,
+  "psi_rand_std": 0.05258261927196998,
+  "psi_serv_mean": 0.10606597507428428,
+  "psi_serv_std": 0.09696307031685901
+}

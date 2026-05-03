@@ -1,0 +1,12 @@
+{
+  "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+  "test": "F4_cross_slice (HASH-PROXY)",
+  "method_note": "Hash-based 50/50 split as a proxy for is_rand; canonical F4 requires re-merging is_rand from source CSVs. This proxy tests within-item \u03c8\u1d62 stability across two random subsets, which lower-bounds the cross-slice persistence we want to measure.",
+  "min_encounters_per_slice": 10,
+  "n_items": 7566,
+  "pearson_r": 0.9753740976469931,
+  "spearman_rho": 0.9509980341061912,
+  "p_value_pearson": 0.0,
+  "threshold": 0.6,
+  "verdict": "PASS"
+}

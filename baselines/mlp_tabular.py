@@ -62,10 +62,10 @@ def main():
     val = df[mask == "val"].reset_index(drop=True)
     test = df[mask == "test"].reset_index(drop=True)
 
-    # build vocabularies on train
+    # Build vocabularies on train
     user_vocab = {u: i for i, u in enumerate(train["user_id"].unique())}
     item_vocab = {i: j for j, i in enumerate(train["item_id"].unique())}
-    n_users = len(user_vocab) + 1  # +1 for oov
+    n_users = len(user_vocab) + 1  # +1 for OOV
     n_items = len(item_vocab) + 1
 
     def encode(df_):
@@ -127,7 +127,7 @@ def main():
             total += float(loss) * len(b)
         print(f"  ep {ep+1}/{args.epochs}: train MSE = {total/train_n:.6f}")
 
-    # eval
+    # Eval
     model.eval()
     with torch.no_grad():
         u_t = torch.tensor(u_test, device=device)

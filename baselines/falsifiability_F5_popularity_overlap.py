@@ -45,7 +45,7 @@ def run(shard_path: Path | str, min_encounters: int = 5, **kwargs) -> dict:
     counts = item_g.size()
     psi_mean = item_g["psi"].mean()
 
-    # filter to items with at least min_encounters
+    # Filter to items with at least min_encounters
     keep = counts[counts >= min_encounters].index
     if len(keep) < 30:
         return {"shard": str(shard_path), "skipped": "<30 items meet threshold",

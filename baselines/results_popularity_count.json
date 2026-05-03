@@ -1,0 +1,50 @@
+{
+  "kuairand_pure/items": {
+    "n": 493976,
+    "mae_rank_aligned": 0.41501369729781046,
+    "spearman": NaN,
+    "true_mean": 0.09611464457199252,
+    "pred_mean_count": 0.0,
+    "true_std": 0.17608874658393686
+  },
+  "kuairand_pure/users": {
+    "n": 526570,
+    "mae_rank_aligned": 0.4233546747562865,
+    "spearman": 0.23001211581381578,
+    "true_mean": 0.09395214197923041,
+    "pred_mean_count": 618.0775889245494,
+    "true_std": 0.1734042984167724
+  },
+  "kuairand_pure/time": {
+    "n": 262266,
+    "mae_rank_aligned": 0.45517775573587105,
+    "spearman": 0.15405923040680394,
+    "true_mean": 0.05551702119348191,
+    "pred_mean_count": 379.76832681323543,
+    "true_std": 0.12798407382203675
+  },
+  "tenrec_qk_article/items": {
+    "n": 9109380,
+    "mae_rank_aligned": 0.4327779233107078,
+    "spearman": NaN,
+    "true_mean": 0.06722213157776977,
+    "pred_mean_count": 0.0,
+    "true_std": 0.0454664198152118
+  },
+  "tenrec_qk_article/users": {
+    "n": 9282301,
+    "mae_rank_aligned": 0.43712159285182534,
+    "spearman": 0.0799278658648597,
+    "true_mean": 0.06802367888289611,
+    "pred_mean_count": 5143.012678860554,
+    "true_std": 0.04591445653708061
+  },
+  "tenrec_qk_article/time": {
+    "n": 4611172,
+    "mae_rank_aligned": 0.4359364430579391,
+    "spearman": 0.12360708924222077,
+    "true_mean": 0.06871953159872769,
+    "pred_mean_count": 4449.366789831305,
+    "true_std": 0.04522636456960229
+  }
+}

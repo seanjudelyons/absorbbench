@@ -178,14 +178,26 @@ def _coldstart_distinctness(item_groups: dict) -> dict:
 
 def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
     shard_path = Path(shard_path)
-    df = pd.read_parquet(shard_path, columns=["item_id", "psi"])
+    df = pd.read_parquet(shard_path, columns=["item_id", "psi", "c", "R_norm"])
     rng = np.random.default_rng(seed)
 
-    # Build item -> (n, psi_arr) once. Numpy arrays for speed.
+    # Numerator-only sanity check: noesis = c * (1 + R_norm), the user-side
+    # term with H(i) divided out. Reviewer-flagged H(i)-leakage concern:
+    # because H(i) is constant per item, F6 split-half ρ and ICC on full ψ
+    # could in principle be inflated by the constant 1/H(i) factor rather
+    # than by stability of the user-side numerator. Computing the same
+    # ramp on noesis-only isolates whether the cold-start informativeness
+    # claim survives without the H(i) lever.
+    df = df.assign(noesis=df["c"] * (1.0 + df["R_norm"]))
+
+    # Build item -> (n, psi_arr) and item -> (n, noesis_arr).
     item_groups: dict = {}
+    item_groups_noesis: dict = {}
     for item_id, grp in df.groupby("item_id", sort=False):
         psi = grp["psi"].to_numpy()
+        noesis = grp["noesis"].to_numpy()
         item_groups[item_id] = (int(len(psi)), psi)
+        item_groups_noesis[item_id] = (int(len(noesis)), noesis)
 
     n_items_total = len(item_groups)
     n_distribution = pd.Series([n for n, _ in item_groups.values()]).describe(
@@ -195,6 +207,11 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
     icc = _icc_one_one(item_groups)
     bucket_curve = _split_half_rho(item_groups, rng)
     coldstart = _coldstart_distinctness(item_groups)
+
+    # Numerator-only sanity check (H-leakage control).
+    rng_noesis = np.random.default_rng(seed)
+    icc_noesis = _icc_one_one(item_groups_noesis)
+    bucket_curve_noesis = _split_half_rho(item_groups_noesis, rng_noesis)
 
     # Find first n bucket where psi-rho >= 0.5 (the F1 reliability threshold).
     threshold_bucket = None
@@ -214,6 +231,16 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
         "bucket_curve": bucket_curve,
         "first_bucket_psi_rho_ge_0.5": threshold_bucket,
         "cold_vs_warm_distinctness": coldstart,
+        "numerator_only_sanity_check": {
+            "description": (
+                "Same ICC and split-half ramp on noesis = c * (1 + R_norm), "
+                "with H(i) divided out. Tests whether the cold-start "
+                "informativeness claim depends on the constant 1/H(i) "
+                "factor per item or on the user-side average alone."
+            ),
+            "icc": icc_noesis,
+            "bucket_curve": bucket_curve_noesis,
+        },
     }
 
 

@@ -1,0 +1,4 @@
+{
+  "stdout": "  \u2705 test_k_floor\n  \u2705 test_psi_bounds\n  \u2705 test_psi_zero_engagement\n  \u2705 test_psi_d2_monotonicity\n  \u2705 test_R_norm_bounds\n  \u2705 test_schema_columns\n  \u2705 test_shard_schema\n  \u2705 test_pre_registered_drops\n\n8 passed, 0 failed\n",
+  "returncode": 0
+}

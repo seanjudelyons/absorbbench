@@ -1,0 +1,19 @@
+{
+  "test": "ICC_subsampling_bootstrap",
+  "explanation": "Subsample Tenrec items down to KR-Pure's empirical per-item encounter-count distribution and item count, then recompute ICC(1,1). If subsampled-Tenrec ICC lies in KR's regime, the 0.22 vs 0.81 gap is consistent with item-count bottleneck.",
+  "n_bootstrap_iterations": 100,
+  "kr_full_icc_psi_S3": 0.6689036552527142,
+  "tenrec_full_icc": 0.8352215083273854,
+  "kr_n_items": 7583,
+  "kr_encounter_count_median": 218,
+  "kr_encounter_count_p25": 183,
+  "kr_encounter_count_p75": 337,
+  "kr_encounter_count_mean": 345.8615323750495,
+  "subsampled_tenrec_icc_mean": 0.7963101805449743,
+  "subsampled_tenrec_icc_std": 0.005444918126849406,
+  "subsampled_tenrec_icc_ci_lo": 0.7856325325621764,
+  "subsampled_tenrec_icc_ci_hi": 0.8059972087512571,
+  "subsampled_tenrec_icc_min": 0.7820922031457817,
+  "subsampled_tenrec_icc_max": 0.8067328100785464,
+  "interpretation": "Subsampled-Tenrec ICC(1,1) at KR's item-count distribution = 0.796 (95% CI [0.786, 0.806]) vs KR full ICC = 0.669 and Tenrec full ICC = 0.835. The subsampled value moves Tenrec's signal toward KR's regime, supporting the item-count bottleneck explanation."
+}

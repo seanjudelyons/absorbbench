@@ -1,0 +1,146 @@
+{
+  "kuairand_pure/items/random": {
+    "n": 493976,
+    "mae": 0.9242398904749719,
+    "rmse": 1.0870723936282065,
+    "spearman": 0.0008054203364892935,
+    "true_mean": 0.09611464457199252,
+    "pred_mean": 1.0001379983934833
+  },
+  "kuairand_pure/items/global_mean": {
+    "n": 493976,
+    "mae": 0.12120202801847953,
+    "rmse": 0.17610031220459266,
+    "spearman": NaN,
+    "true_mean": 0.09611464457199252,
+    "pred_mean": 0.09408091504020348
+  },
+  "kuairand_pure/items/user_mean": {
+    "n": 493976,
+    "mae": 0.1116546069886207,
+    "rmse": 0.16951664747359294,
+    "spearman": 0.298798448189856,
+    "true_mean": 0.09611464457199252,
+    "pred_mean": 0.09534159979895132
+  },
+  "kuairand_pure/users/random": {
+    "n": 526570,
+    "mae": 0.9258015147924342,
+    "rmse": 1.0886086319951693,
+    "spearman": -0.0010507366433831408,
+    "true_mean": 0.09395214197923041,
+    "pred_mean": 1.0002236425508675
+  },
+  "kuairand_pure/users/global_mean": {
+    "n": 526570,
+    "mae": 0.12036132492511166,
+    "rmse": 0.17341146100005814,
+    "spearman": NaN,
+    "true_mean": 0.09395214197923041,
+    "pred_mean": 0.0955462562715335
+  },
+  "kuairand_pure/users/user_mean": {
+    "n": 526570,
+    "mae": 0.12036132492511166,
+    "rmse": 0.17341146100005814,
+    "spearman": NaN,
+    "true_mean": 0.09395214197923041,
+    "pred_mean": 0.0955462562715335
+  },
+  "kuairand_pure/time/random": {
+    "n": 262266,
+    "mae": 0.9536474130915429,
+    "rmse": 1.1137461432002052,
+    "spearman": 0.0019263208553480984,
+    "true_mean": 0.05551702119348191,
+    "pred_mean": 0.999470317644436
+  },
+  "kuairand_pure/time/global_mean": {
+    "n": 262266,
+    "mae": 0.10364569289931776,
+    "rmse": 0.13627006156518273,
+    "spearman": NaN,
+    "true_mean": 0.05551702119348191,
+    "pred_mean": 0.1023109201790964
+  },
+  "kuairand_pure/time/user_mean": {
+    "n": 262266,
+    "mae": 0.1039426992784909,
+    "rmse": 0.14411749542990243,
+    "spearman": 0.1795223987559084,
+    "true_mean": 0.05551702119348191,
+    "pred_mean": 0.10755685739802383
+  },
+  "tenrec_qk_article/items/random": {
+    "n": 9109380,
+    "mae": 0.19027313553996136,
+    "rmse": 0.23057012966839008,
+    "spearman": 0.0007401389364246144,
+    "true_mean": 0.06722213157776977,
+    "pred_mean": 0.24400610682174093
+  },
+  "tenrec_qk_article/items/global_mean": {
+    "n": 9109380,
+    "mae": 0.03627769301749537,
+    "rmse": 0.04547427109732702,
+    "spearman": NaN,
+    "true_mean": 0.06722213157776977,
+    "pred_mean": 0.06806725165830022
+  },
+  "tenrec_qk_article/items/user_mean": {
+    "n": 9109380,
+    "mae": 0.027676390039748956,
+    "rmse": 0.03792628853239728,
+    "spearman": 0.5943799530525355,
+    "true_mean": 0.06722213157776977,
+    "pred_mean": 0.06782162387389927
+  },
+  "tenrec_qk_article/users/random": {
+    "n": 9282301,
+    "mae": 0.18979279622041373,
+    "rmse": 0.23007174628932708,
+    "spearman": -0.00015976544854512669,
+    "true_mean": 0.06802367888289611,
+    "pred_mean": 0.24401124422985274
+  },
+  "tenrec_qk_article/users/global_mean": {
+    "n": 9282301,
+    "mae": 0.036899413183129115,
+    "rmse": 0.04591450482729231,
+    "spearman": NaN,
+    "true_mean": 0.06802367888289611,
+    "pred_mean": 0.06795540331155582
+  },
+  "tenrec_qk_article/users/user_mean": {
+    "n": 9282301,
+    "mae": 0.036899413183129115,
+    "rmse": 0.04591450482729231,
+    "spearman": NaN,
+    "true_mean": 0.06802367888289611,
+    "pred_mean": 0.06795540331155582
+  },
+  "tenrec_qk_article/time/random": {
+    "n": 4611172,
+    "mae": 0.1891852932351967,
+    "rmse": 0.2293957317238924,
+    "spearman": 1.623785353822246e-05,
+    "true_mean": 0.06871953159872769,
+    "pred_mean": 0.24401738360374248
+  },
+  "tenrec_qk_article/time/global_mean": {
+    "n": 4611172,
+    "mae": 0.03599376118247888,
+    "rmse": 0.045234535905610426,
+    "spearman": NaN,
+    "true_mean": 0.06871953159872769,
+    "pred_mean": 0.06785951416084411
+  },
+  "tenrec_qk_article/time/user_mean": {
+    "n": 4611172,
+    "mae": 0.03045004919796321,
+    "rmse": 0.040275937821412366,
+    "spearman": 0.4620668995281057,
+    "true_mean": 0.06871953159872769,
+    "pred_mean": 0.0692334405573233
+  }
+}

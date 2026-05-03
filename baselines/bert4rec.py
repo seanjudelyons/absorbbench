@@ -57,7 +57,7 @@ class BERT4RecPsi(nn.Module):
     def __init__(self, n_items: int, hidden: int = 64, n_layers: int = 2,
                  n_heads: int = 2, dropout: float = 0.2, max_len: int = 50):
         super().__init__()
-        # 0 = pad, 1 = mask, 2..n+1 = real items
+        # 0 = PAD, 1 = MASK, 2..n+1 = real items
         self.item_embed = nn.Embedding(n_items + 2, hidden, padding_idx=0)
         self.pos_embed = nn.Embedding(max_len, hidden)
         self.dropout = nn.Dropout(dropout)
@@ -84,11 +84,11 @@ class BERT4RecPsi(nn.Module):
         pos = torch.arange(L, device=seq_idx.device).unsqueeze(0).expand(B, L)
         x = self.item_embed(seq_idx) + self.pos_embed(pos)
         x = self.dropout(x)
-        # no causal mask — bert-style bidirectional attention
+        # No causal mask — BERT-style bidirectional attention
         x = self.encoder(x)
-        # pull the representation at the masked position
+        # Pull the representation at the masked position
         b_idx = torch.arange(B, device=seq_idx.device)
-        z = x[b_idx, mask_pos]  # [b, hidden]
+        z = x[b_idx, mask_pos]  # [B, hidden]
         return self.head(z).squeeze(-1) * 2.0  # ψ ∈ [0, 2]
 
 
@@ -102,11 +102,11 @@ def _build_masked_sequences(df: pd.DataFrame, max_len: int = 50,
     """
     df = df.sort_values(["user_id", "position"]).reset_index(drop=True)
     if item_vocab is None:
-        # item indices: 0=pad, 1=mask, 2..n+1=real items
+        # Item indices: 0=PAD, 1=MASK, 2..n+1=real items
         item_vocab = {i: idx + 2 for idx, i in enumerate(df["item_id"].unique())}
     n = len(df)
 
-    seq = np.zeros((n, max_len), dtype=np.int64)  # pad-filled
+    seq = np.zeros((n, max_len), dtype=np.int64)  # PAD-filled
     mask_pos = np.full(n, max_len // 2, dtype=np.int64)
     y = df["psi"].to_numpy().astype(np.float32)
 
@@ -124,14 +124,14 @@ def _build_masked_sequences(df: pd.DataFrame, max_len: int = 50,
     for g in range(len(bounds) - 1):
         s, e = bounds[g], bounds[g + 1]
         for k in range(s, e):
-            # window: items from k-half to k+half-1, with item at position k masked
+            # Window: items from k-half to k+half-1, with item at position k masked
             ws = max(s, k - half)
             we = min(e, k + half)
             window_items = item_ids[ws:we]
             window_idx = np.array([item_vocab.get(it, 0) for it in window_items], dtype=np.int64)
             local_mask = k - ws
             window_idx[local_mask] = MASK_ID
-            # place into sequence; pad on the left
+            # Place into sequence; pad on the LEFT
             put_start = max_len - len(window_idx)
             seq[k, put_start:] = window_idx
             mask_pos[k] = put_start + local_mask

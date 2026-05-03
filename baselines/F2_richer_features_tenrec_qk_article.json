@@ -1,0 +1,27 @@
+{
+  "test": "F2_richer_features (Tenrec QK-article)",
+  "shard": "/Users/seanlyons/Downloads/Phil Tech/datasets/tenrec/QK-article.csv",
+  "warm_min_encounters": 10,
+  "cold_max_encounters": 5,
+  "n_warm_train_items": 113810,
+  "n_cold_test_items": 87540,
+  "feature_set": {
+    "numeric": [
+      "item_score1",
+      "item_score2",
+      "item_score3"
+    ],
+    "categorical_onehot": [
+      "category_first",
+      "category_second"
+    ],
+    "total_dims": 382
+  },
+  "mae_baseline_global_mean": 0.03544020402144649,
+  "mae_predictor": 0.02950828970913118,
+  "relative_mae_reduction": 0.16737810845348516,
+  "passes_10_percent_band": true,
+  "spearman_rho_pred_vs_actual_cold": 0.3799326166176985,
+  "p_value_spearman": 0.0,
+  "note_vs_original_F2": "Original F2 on Tenrec (S-polynomials only): 4.5% MAE-reduction. This uses category_first, category_second (one-hot) and item_score1/2/3 (numeric)."
+}

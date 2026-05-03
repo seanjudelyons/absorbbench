@@ -1,0 +1,22 @@
+{
+  "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+  "test": "F5_popularity_overlap",
+  "min_encounters": 5,
+  "n_items": 139739,
+  "spearman_rho_count_vs_psi": 0.1355233469748396,
+  "pearson_r_log_count_vs_psi": 0.13710669283540594,
+  "p_value": 0.0,
+  "verdict": "FORMULA_DIFFERS_FROM_POPULARITY",
+  "interpretation": "formula and popularity measure substantially different per-item statistics.",
+  "popularity_summary": {
+    "mean_count": 328.88011220919,
+    "median_count": 42.0,
+    "max_count": 363219
+  },
+  "psi_summary": {
+    "mean": 0.05904240183005593,
+    "std": 0.03719281115791937,
+    "min": 0.0,
+    "max": 0.2486856906047226
+  }
+}

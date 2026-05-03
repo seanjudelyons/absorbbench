@@ -1,0 +1,379 @@
+{
+  "falsifiability_F1_kuairand_pure": {
+    "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+    "test": "F1_user_half",
+    "min_encounters": 30,
+    "n_items": 7556,
+    "spearman_rho": 0.9531882182845665,
+    "pearson_r": 0.9757046508843441,
+    "p_value": 0.0,
+    "threshold": 0.5,
+    "verdict": "PASS",
+    "median_n_per_item": 219.0
+  },
+  "falsifiability_F2_kuairand_pure": {
+    "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+    "test": "F2_content_only",
+    "n_items_train": 5389,
+    "n_items_test_cold": 1423,
+    "mae_content_only": 0.04184605380453244,
+    "mae_global_mean": 0.04584761692810071,
+    "relative_mae_reduction": 0.08727963178203155,
+    "spearman_rho_content_vs_actual": 0.3372739499024632,
+    "threshold": 0.1,
+    "verdict": "FAIL",
+    "feature_set": "K, log(1+K), K^2",
+    "weights": {
+      "K": 0.14897866660500772,
+      "log_K": -0.6739777709019176,
+      "K_sq": -0.004728573599699241,
+      "bias": 0.6390243334210919
+    },
+    "limitation": "Content features used: K only. Tag-distribution + body-text features deferred (would require modality-specific embedding pipelines on H100 in Phase 5)."
+  },
+  "falsifiability_F3_kuairand_pure": {
+    "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+    "test": "F3_shape_differential",
+    "min_encounters": 30,
+    "n_items": 7556,
+    "raw_spearman_psi_vs_high_completion": 0.9180407475743616,
+    "partial_spearman_psi_vs_high_completion_given_click_rate": 0.9175808215402862,
+    "p_value": 0.0,
+    "threshold": 0.4,
+    "verdict": "PASS",
+    "click_rate_summary": {
+      "mean": 0.933849940881596,
+      "min": 0.04225352112676056,
+      "max": 1.0
+    }
+  },
+  "falsifiability_F4_kuairand_pure": {
+    "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+    "test": "F4_cross_slice (HASH-PROXY)",
+    "method_note": "Hash-based 50/50 split as a proxy for is_rand; canonical F4 requires re-merging is_rand from source CSVs. This proxy tests within-item \u03c8\u1d62 stability across two random subsets, which lower-bounds the cross-slice persistence we want to measure.",
+    "min_encounters_per_slice": 10,
+    "n_items": 7566,
+    "pearson_r": 0.9753740976469931,
+    "spearman_rho": 0.9509980341061912,
+    "p_value_pearson": 0.0,
+    "threshold": 0.6,
+    "verdict": "PASS"
+  },
+  "falsifiability_F5_kuairand_pure": {
+    "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+    "test": "F5_popularity_overlap",
+    "min_encounters": 5,
+    "n_items": 7582,
+    "spearman_rho_count_vs_psi": 0.4926258639818632,
+    "pearson_r_log_count_vs_psi": 0.3979813894450712,
+    "p_value": 0.0,
+    "verdict": "FORMULA_DIFFERS_FROM_POPULARITY",
+    "interpretation": "formula and popularity measure substantially different per-item statistics.",
+    "popularity_summary": {
+      "mean_count": 345.90675283566344,
+      "median_count": 218.0,
+      "max_count": 10515
+    },
+    "psi_summary": {
+      "mean": 0.06798343153589277,
+      "std": 0.07001554646382958,
+      "min": 0.0006484388120698402,
+      "max": 1.0913801722286227
+    }
+  },
+  "falsifiability_F1_tenrec_qk_article": {
+    "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+    "test": "F1_user_half",
+    "min_encounters": 30,
+    "n_items": 79210,
+    "spearman_rho": 0.9966055846842607,
+    "pearson_r": 0.9959833518504284,
+    "p_value": 0.0,
+    "threshold": 0.5,
+    "verdict": "PASS",
+    "median_n_per_item": 150.0
+  },
+  "falsifiability_F2_tenrec_qk_article": {
+    "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+    "test": "F2_content_only",
+    "n_items_train": 153961,
+    "n_items_test_cold": 44018,
+    "mae_content_only": 0.028384860087903096,
+    "mae_global_mean": 0.02971711771861786,
+    "relative_mae_reduction": 0.04483132056512001,
+    "spearman_rho_content_vs_actual": 0.2753257053631502,
+    "threshold": 0.1,
+    "verdict": "FAIL",
+    "feature_set": "K, log(1+K), K^2",
+    "weights": {
+      "K": -0.0813409161643729,
+      "log_K": 0.38974875071212617,
+      "K_sq": 0.0019163960071942546,
+      "bias": -0.27594296876245744
+    },
+    "limitation": "Content features used: K only. Tag-distribution + body-text features deferred (would require modality-specific embedding pipelines on H100 in Phase 5)."
+  },
+  "falsifiability_F3_tenrec_qk_article": {
+    "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+    "test": "F3_shape_differential",
+    "min_encounters": 30,
+    "n_items": 79210,
+    "raw_spearman_psi_vs_high_completion": 0.565324332953462,
+    "partial_spearman_psi_vs_high_completion_given_click_rate": 0.2630098386353074,
+    "p_value": 0.0,
+    "threshold": 0.4,
+    "verdict": "FAIL",
+    "click_rate_summary": {
+      "mean": 0.9647804161787578,
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "falsifiability_F4_tenrec_qk_article": {
+    "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+    "test": "F4_cross_slice",
+    "skipped": "F4 only applies to KuaiRand-Pure (random + served slices)"
+  },
+  "falsifiability_F5_tenrec_qk_article": {
+    "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+    "test": "F5_popularity_overlap",
+    "min_encounters": 5,
+    "n_items": 139739,
+    "spearman_rho_count_vs_psi": 0.1355233469748396,
+    "pearson_r_log_count_vs_psi": 0.13710669283540594,
+    "p_value": 0.0,
+    "verdict": "FORMULA_DIFFERS_FROM_POPULARITY",
+    "interpretation": "formula and popularity measure substantially different per-item statistics.",
+    "popularity_summary": {
+      "mean_count": 328.88011220919,
+      "median_count": 42.0,
+      "max_count": 363219
+    },
+    "psi_summary": {
+      "mean": 0.05904240183005593,
+      "std": 0.03719281115791937,
+      "min": 0.0,
+      "max": 0.2486856906047226
+    }
+  },
+  "falsifiability_F6_kuairand_pure": {
+    "shard": "corpus/spine/kuairand_pure.parquet",
+    "test": "F6_coldstart_ramp",
+    "seed": 0,
+    "n_items_total": 7583,
+    "n_per_item_distribution": {
+      "count": 7583.0,
+      "mean": 345.8615323750495,
+      "std": 434.66412241563177,
+      "min": 3.0,
+      "50%": 218.0,
+      "75%": 337.0,
+      "90%": 627.0,
+      "99%": 2063.060000000005,
+      "max": 10515.0
+    },
+    "icc": {
+      "n_items_for_icc": 7583,
+      "sigma_between": 0.004902054213231807,
+      "sigma_within_mean": 0.017317652369303205,
+      "snr_between_over_within": 0.283066902412307,
+      "icc_1_1": 0.2206174143219734,
+      "icc_1_5": 0.5859786729306987,
+      "icc_1_10": 0.7389489946266179,
+      "icc_1_30": 0.8946482032329123
+    },
+    "bucket_curve": [
+      {
+        "bucket": "n=2",
+        "n_lo": 2,
+        "n_hi": 2,
+        "n_items": 0,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=3",
+        "n_lo": 3,
+        "n_hi": 3,
+        "n_items": 1,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[4,5]",
+        "n_lo": 4,
+        "n_hi": 5,
+        "n_items": 1,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[6,10]",
+        "n_lo": 6,
+        "n_hi": 10,
+        "n_items": 2,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[11,30]",
+        "n_lo": 11,
+        "n_hi": 30,
+        "n_items": 24,
+        "spearman_rho_psi": null,
+        "spearman_rho_count": null
+      },
+      {
+        "bucket": "n=[31,100]",
+        "n_lo": 31,
+        "n_hi": 100,
+        "n_items": 117,
+        "spearman_rho_psi": 0.7733444229645281,
+        "p_value_psi": 1.655712859657306e-24,
+        "spearman_rho_count": 0.9987338481020204,
+        "p_value_count": 3.6102107725008964e-151,
+        "count_unique_values": 33
+      },
+      {
+        "bucket": "n=[101,1000000000]",
+        "n_lo": 101,
+        "n_hi": 1000000000,
+        "n_items": 7438,
+        "spearman_rho_psi": 0.9574708035041729,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9998171691775525,
+        "p_value_count": 0.0,
+        "count_unique_values": 689
+      }
+    ],
+    "first_bucket_psi_rho_ge_0.5": "n=[31,100]",
+    "cold_vs_warm_distinctness": {
+      "distinctness_skipped": "insufficient cold or warm items",
+      "n_cold": 0,
+      "n_warm": 7556
+    }
+  },
+  "falsifiability_F6_tenrec_qk_article": {
+    "shard": "corpus/spine/tenrec_qk_article.parquet",
+    "test": "F6_coldstart_ramp",
+    "seed": 0,
+    "n_items_total": 220122,
+    "n_per_item_distribution": {
+      "count": 220122.0,
+      "mean": 209.48259601493717,
+      "std": 1227.4814454721522,
+      "min": 1.0,
+      "50%": 11.0,
+      "75%": 75.0,
+      "90%": 387.0,
+      "99%": 3620.0,
+      "max": 363219.0
+    },
+    "icc": {
+      "n_items_for_icc": 181868,
+      "sigma_between": 0.0013944499196513673,
+      "sigma_within_mean": 0.00033300225323703545,
+      "snr_between_over_within": 4.1875089615648315,
+      "icc_1_1": 0.8072292486800164,
+      "icc_1_5": 0.9544160475221756,
+      "icc_1_10": 0.9766764335896566,
+      "icc_1_30": 0.9921026821178265
+    },
+    "bucket_curve": [
+      {
+        "bucket": "n=2",
+        "n_lo": 2,
+        "n_hi": 2,
+        "n_items": 19728,
+        "spearman_rho_psi": 0.6731843917802494,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": NaN,
+        "p_value_count": NaN,
+        "count_unique_values": 1
+      },
+      {
+        "bucket": "n=3",
+        "n_lo": 3,
+        "n_hi": 3,
+        "n_items": 12964,
+        "spearman_rho_psi": 0.7681220376490957,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": NaN,
+        "p_value_count": NaN,
+        "count_unique_values": 1
+      },
+      {
+        "bucket": "n=[4,5]",
+        "n_lo": 4,
+        "n_hi": 5,
+        "n_items": 16594,
+        "spearman_rho_psi": 0.8537691791834258,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": NaN,
+        "p_value_count": NaN,
+        "count_unique_values": 1
+      },
+      {
+        "bucket": "n=[6,10]",
+        "n_lo": 6,
+        "n_hi": 10,
+        "n_items": 22036,
+        "spearman_rho_psi": 0.9202250654109878,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.7988860581860555,
+        "p_value_count": 0.0,
+        "count_unique_values": 3
+      },
+      {
+        "bucket": "n=[11,30]",
+        "n_lo": 11,
+        "n_hi": 30,
+        "n_items": 32285,
+        "spearman_rho_psi": 0.9705483296230206,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9818615657651094,
+        "p_value_count": 0.0,
+        "count_unique_values": 11
+      },
+      {
+        "bucket": "n=[31,100]",
+        "n_lo": 31,
+        "n_hi": 100,
+        "n_items": 29861,
+        "spearman_rho_psi": 0.9925220039939012,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9982059049338308,
+        "p_value_count": 0.0,
+        "count_unique_values": 36
+      },
+      {
+        "bucket": "n=[101,1000000000]",
+        "n_lo": 101,
+        "n_hi": 1000000000,
+        "n_items": 48400,
+        "spearman_rho_psi": 0.9990308249786771,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9999771500797859,
+        "p_value_count": 0.0,
+        "count_unique_values": 3319
+      }
+    ],
+    "first_bucket_psi_rho_ge_0.5": "n=2",
+    "cold_vs_warm_distinctness": {
+      "n_cold_n1": 38254,
+      "n_warm_ge30": 79210,
+      "cold_mean": 0.03696291408941694,
+      "cold_std": 0.03856731021893123,
+      "cold_q10": 0.0,
+      "cold_q50": 0.026801781594808973,
+      "cold_q90": 0.08912674873453938,
+      "warm_mean": 0.06292803015375024,
+      "warm_std": 0.038476970307529945,
+      "warm_q10": 0.021320973093651264,
+      "warm_q50": 0.05388351547099077,
+      "warm_q90": 0.11775455733758318,
+      "wasserstein_1": 0.02609089760524813,
+      "wasserstein_normalised": 0.6780912685358218
+    }
+  }
+}

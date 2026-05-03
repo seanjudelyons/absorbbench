@@ -1,0 +1,215 @@
+{
+  "shard": "corpus/spine/tenrec_qk_article.parquet",
+  "test": "F6_coldstart_ramp",
+  "seed": 0,
+  "n_items_total": 220122,
+  "n_per_item_distribution": {
+    "count": 220122.0,
+    "mean": 209.48259601493717,
+    "std": 1227.4814454721522,
+    "min": 1.0,
+    "50%": 11.0,
+    "75%": 75.0,
+    "90%": 387.0,
+    "99%": 3620.0,
+    "max": 363219.0
+  },
+  "icc": {
+    "n_items_for_icc": 181868,
+    "sigma_between": 0.0013944499196513673,
+    "sigma_within_mean": 0.00033300225323703545,
+    "snr_between_over_within": 4.1875089615648315,
+    "icc_1_1": 0.8072292486800164,
+    "icc_1_5": 0.9544160475221756,
+    "icc_1_10": 0.9766764335896566,
+    "icc_1_30": 0.9921026821178265
+  },
+  "bucket_curve": [
+    {
+      "bucket": "n=2",
+      "n_lo": 2,
+      "n_hi": 2,
+      "n_items": 19728,
+      "spearman_rho_psi": 0.6731843917802494,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": NaN,
+      "p_value_count": NaN,
+      "count_unique_values": 1
+    },
+    {
+      "bucket": "n=3",
+      "n_lo": 3,
+      "n_hi": 3,
+      "n_items": 12964,
+      "spearman_rho_psi": 0.7681220376490957,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": NaN,
+      "p_value_count": NaN,
+      "count_unique_values": 1
+    },
+    {
+      "bucket": "n=[4,5]",
+      "n_lo": 4,
+      "n_hi": 5,
+      "n_items": 16594,
+      "spearman_rho_psi": 0.8537691791834258,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": NaN,
+      "p_value_count": NaN,
+      "count_unique_values": 1
+    },
+    {
+      "bucket": "n=[6,10]",
+      "n_lo": 6,
+      "n_hi": 10,
+      "n_items": 22036,
+      "spearman_rho_psi": 0.9202250654109878,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": 0.7988860581860555,
+      "p_value_count": 0.0,
+      "count_unique_values": 3
+    },
+    {
+      "bucket": "n=[11,30]",
+      "n_lo": 11,
+      "n_hi": 30,
+      "n_items": 32285,
+      "spearman_rho_psi": 0.9705483296230206,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": 0.9818615657651094,
+      "p_value_count": 0.0,
+      "count_unique_values": 11
+    },
+    {
+      "bucket": "n=[31,100]",
+      "n_lo": 31,
+      "n_hi": 100,
+      "n_items": 29861,
+      "spearman_rho_psi": 0.9925220039939012,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": 0.9982059049338308,
+      "p_value_count": 0.0,
+      "count_unique_values": 36
+    },
+    {
+      "bucket": "n=[101,1000000000]",
+      "n_lo": 101,
+      "n_hi": 1000000000,
+      "n_items": 48400,
+      "spearman_rho_psi": 0.9990308249786771,
+      "p_value_psi": 0.0,
+      "spearman_rho_count": 0.9999771500797859,
+      "p_value_count": 0.0,
+      "count_unique_values": 3319
+    }
+  ],
+  "first_bucket_psi_rho_ge_0.5": "n=2",
+  "cold_vs_warm_distinctness": {
+    "n_cold_n1": 38254,
+    "n_warm_ge30": 79210,
+    "cold_mean": 0.03696291408941694,
+    "cold_std": 0.03856731021893123,
+    "cold_q10": 0.0,
+    "cold_q50": 0.026801781594808973,
+    "cold_q90": 0.08912674873453938,
+    "warm_mean": 0.06292803015375024,
+    "warm_std": 0.038476970307529945,
+    "warm_q10": 0.021320973093651264,
+    "warm_q50": 0.05388351547099077,
+    "warm_q90": 0.11775455733758318,
+    "wasserstein_1": 0.02609089760524813,
+    "wasserstein_normalised": 0.6780912685358218
+  },
+  "numerator_only_sanity_check": {
+    "description": "Same ICC and split-half ramp on noesis = c * (1 + R_norm), with H(i) divided out. Tests whether the cold-start informativeness claim depends on the constant 1/H(i) factor per item or on the user-side average alone.",
+    "icc": {
+      "n_items_for_icc": 181868,
+      "sigma_between": 0.06158390021632161,
+      "sigma_within_mean": 0.015929512093717513,
+      "snr_between_over_within": 3.8660255162874617,
+      "icc_1_1": 0.7944934738519516,
+      "icc_1_5": 0.9508119171414811,
+      "icc_1_10": 0.9747858404870757,
+      "icc_1_30": 0.9914515861148366
+    },
+    "bucket_curve": [
+      {
+        "bucket": "n=2",
+        "n_lo": 2,
+        "n_hi": 2,
+        "n_items": 19728,
+        "spearman_rho_psi": 0.6671619261378223,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": NaN,
+        "p_value_count": NaN,
+        "count_unique_values": 1
+      },
+      {
+        "bucket": "n=3",
+        "n_lo": 3,
+        "n_hi": 3,
+        "n_items": 12964,
+        "spearman_rho_psi": 0.7641208211145818,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": NaN,
+        "p_value_count": NaN,
+        "count_unique_values": 1
+      },
+      {
+        "bucket": "n=[4,5]",
+        "n_lo": 4,
+        "n_hi": 5,
+        "n_items": 16594,
+        "spearman_rho_psi": 0.8521207472888336,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": NaN,
+        "p_value_count": NaN,
+        "count_unique_values": 1
+      },
+      {
+        "bucket": "n=[6,10]",
+        "n_lo": 6,
+        "n_hi": 10,
+        "n_items": 22036,
+        "spearman_rho_psi": 0.9219955700803758,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.7988860581860555,
+        "p_value_count": 0.0,
+        "count_unique_values": 3
+      },
+      {
+        "bucket": "n=[11,30]",
+        "n_lo": 11,
+        "n_hi": 30,
+        "n_items": 32285,
+        "spearman_rho_psi": 0.9720515474501845,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9818615657651094,
+        "p_value_count": 0.0,
+        "count_unique_values": 11
+      },
+      {
+        "bucket": "n=[31,100]",
+        "n_lo": 31,
+        "n_hi": 100,
+        "n_items": 29861,
+        "spearman_rho_psi": 0.9932779290146154,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9982059049338308,
+        "p_value_count": 0.0,
+        "count_unique_values": 36
+      },
+      {
+        "bucket": "n=[101,1000000000]",
+        "n_lo": 101,
+        "n_hi": 1000000000,
+        "n_items": 48400,
+        "spearman_rho_psi": 0.9990729636771287,
+        "p_value_psi": 0.0,
+        "spearman_rho_count": 0.9999771500797859,
+        "p_value_count": 0.0,
+        "count_unique_values": 3319
+      }
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "test": "F7_external_anchor",
+  "shard": "kuairand_pure",
+  "n_train_rows": 1835867,
+  "n_test_rows": 786801,
+  "train_test_split": "first 70% by time_ms",
+  "n_items_in_intersection": 7294,
+  "min_encounters_per_window": 10,
+  "external_anchors_NOT_in_psi_formula": [
+    "profile_stay_time (seconds on author profile)",
+    "comment_stay_time (seconds reading comments)",
+    "is_hate (negative-engagement indicator)",
+    "is_click (binary click)",
+    "long_view (\u226510s view flag)"
+  ],
+  "anchors": [
+    {
+      "psi": "psi_S0",
+      "anchor": "profile_stay_time (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.0031331691486796262,
+      "pearson_r": -0.004077573129505962,
+      "p_value_spearman": 0.7890512271420443,
+      "passes_0.20_band": false
+    },
+    {
+      "psi": "psi_S3",
+      "anchor": "profile_stay_time (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.0035036434688329736,
+      "pearson_r": -0.0078120401060281595,
+      "p_value_spearman": 0.7648042214630658,
+      "passes_0.20_band": false
+    },
+    {
+      "psi": "psi_S0",
+      "anchor": "comment_stay_time (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.2878215107899031,
+      "pearson_r": 0.18253955649597903,
+      "p_value_spearman": 3.8323675485361625e-139,
+      "passes_0.20_band": true
+    },
+    {
+      "psi": "psi_S3",
+      "anchor": "comment_stay_time (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.27506891122269944,
+      "pearson_r": 0.012361868036669912,
+      "p_value_spearman": 8.869683134710354e-127,
+      "passes_0.20_band": true
+    },
+    {
+      "psi": "psi_S0",
+      "anchor": "is_hate rate (held-out)",
+      "expected_sign": "-",
+      "n_items": 7294,
+      "spearman_rho": 0.0009661276470157054,
+      "pearson_r": -0.020027780668676623,
+      "p_value_spearman": 0.9342507642635058,
+      "passes_0.20_band": false
+    },
+    {
+      "psi": "psi_S3",
+      "anchor": "is_hate rate (held-out)",
+      "expected_sign": "-",
+      "n_items": 7294,
+      "spearman_rho": -0.002252188212275822,
+      "pearson_r": -0.02291798965735216,
+      "p_value_spearman": 0.8474952914167047,
+      "passes_0.20_band": false
+    },
+    {
+      "psi": "psi_S0",
+      "anchor": "is_click rate (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.4408019140943319,
+      "pearson_r": 0.38293197877686014,
+      "p_value_spearman": 0.0,
+      "passes_0.20_band": true
+    },
+    {
+      "psi": "psi_S3",
+      "anchor": "is_click rate (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.4165186795246229,
+      "pearson_r": -0.0391780972923441,
+      "p_value_spearman": 4.379224353967987e-304,
+      "passes_0.20_band": true
+    },
+    {
+      "psi": "psi_S0",
+      "anchor": "long_view rate (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.5185970129524149,
+      "pearson_r": 0.47693168722380597,
+      "p_value_spearman": 0.0,
+      "passes_0.20_band": true
+    },
+    {
+      "psi": "psi_S3",
+      "anchor": "long_view rate (held-out)",
+      "expected_sign": "+",
+      "n_items": 7294,
+      "spearman_rho": 0.48492337719363776,
+      "pearson_r": -0.001096974414176923,
+      "p_value_spearman": 0.0,
+      "passes_0.20_band": true
+    }
+  ]
+}

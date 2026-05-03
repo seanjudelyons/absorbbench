@@ -54,7 +54,7 @@ class SASRecEncoder(nn.Module):
     def __init__(self, n_items: int, hidden: int = 64, n_layers: int = 2,
                  n_heads: int = 2, dropout: float = 0.2, max_len: int = 50):
         super().__init__()
-        self.item_embed = nn.Embedding(n_items + 1, hidden, padding_idx=0)  # 0 = pad
+        self.item_embed = nn.Embedding(n_items + 1, hidden, padding_idx=0)  # 0 = PAD
         self.pos_embed = nn.Embedding(max_len, hidden)
         self.dropout = nn.Dropout(dropout)
         layer = nn.TransformerEncoderLayer(
@@ -72,10 +72,10 @@ class SASRecEncoder(nn.Module):
         pos = torch.arange(L, device=hist_idx.device).unsqueeze(0).expand(B, L)
         x = self.item_embed(hist_idx) + self.pos_embed(pos)
         x = self.dropout(x)
-        # causal mask
+        # Causal mask
         mask = torch.triu(torch.ones(L, L, device=hist_idx.device), diagonal=1).bool()
         x = self.encoder(x, mask=mask)
-        # take the output at the last non-pad position. easier: take last position.
+        # Take the output at the last non-pad position. Easier: take last position.
         return x[:, -1, :]
 
 
@@ -117,7 +117,7 @@ def _build_history_sequences(df: pd.DataFrame, max_len: int = 50,
     user_ids = df["user_id"].to_numpy()
     item_ids = df["item_id"].to_numpy()
 
-    # group bounds
+    # Group bounds
     bounds = [0]
     for i in range(1, n):
         if user_ids[i] != user_ids[i - 1]:
@@ -131,7 +131,7 @@ def _build_history_sequences(df: pd.DataFrame, max_len: int = 50,
             history_start = max(s, k - max_len)
             history_items = item_ids[history_start:k]
             history_idx = np.array([item_vocab.get(it, 0) for it in history_items], dtype=np.int64)
-            # pad on the left so the most recent item is at position max_len-1
+            # Pad on the LEFT so the most recent item is at position max_len-1
             hist[k, max_len - len(history_idx):] = history_idx
 
     return hist, cand, y, item_vocab
@@ -212,7 +212,7 @@ def run(shard_path: Path | str, split: str = "items", seed: int = 0,
             loss.backward()
             opt.step()
             total += float(loss) * len(b)
-        # optional: print epoch loss
+        # Optional: print epoch loss
 
     model.eval()
     with torch.no_grad():

@@ -1,0 +1,22 @@
+{
+  "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+  "test": "F5_popularity_overlap",
+  "min_encounters": 5,
+  "n_items": 7582,
+  "spearman_rho_count_vs_psi": 0.4926258639818632,
+  "pearson_r_log_count_vs_psi": 0.3979813894450712,
+  "p_value": 0.0,
+  "verdict": "FORMULA_DIFFERS_FROM_POPULARITY",
+  "interpretation": "formula and popularity measure substantially different per-item statistics.",
+  "popularity_summary": {
+    "mean_count": 345.90675283566344,
+    "median_count": 218.0,
+    "max_count": 10515
+  },
+  "psi_summary": {
+    "mean": 0.06798343153589277,
+    "std": 0.07001554646382958,
+    "min": 0.0006484388120698402,
+    "max": 1.0913801722286227
+  }
+}

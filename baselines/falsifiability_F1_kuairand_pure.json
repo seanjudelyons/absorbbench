@@ -1,0 +1,12 @@
+{
+  "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+  "test": "F1_user_half",
+  "min_encounters": 30,
+  "n_items": 7556,
+  "spearman_rho": 0.9531882182845665,
+  "pearson_r": 0.9757046508843441,
+  "p_value": 0.0,
+  "threshold": 0.5,
+  "verdict": "PASS",
+  "median_n_per_item": 219.0
+}

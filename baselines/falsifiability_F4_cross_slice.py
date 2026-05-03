@@ -32,25 +32,25 @@ def run(shard_path: Path | str, min_encounters_per_slice: int = 10,
         return {"shard": str(shard_path), "test": "F4_cross_slice",
                 "skipped": "F4 only applies to KuaiRand-Pure (random + served slices)"}
 
-    # we need to re-derive the slice membership. the unified parquet doesn't
-    # carry is_rand directly; we recover it from the original csvs by filename
+    # We need to re-derive the slice membership. The unified parquet doesn't
+    # carry is_rand directly; we recover it from the original CSVs by filename
     # convention used by corpus_build.extractors.kuairand_pure_rows.
-    # for phase 5 simplicity: assume the parquet was built with both slices and
+    # For Phase 5 simplicity: assume the parquet was built with both slices and
     # we can split via a hash of (user_id, item_id, position) modulo 2 — this
     # is a *proxy* for cross-slice persistence; documented as a limitation.
     #
-    # the honest version of f4 requires re-merging with the source csvs to
-    # recover is_rand. we provide a hash-based proxy here for colab-friendly
+    # The honest version of F4 requires re-merging with the source CSVs to
+    # recover is_rand. We provide a hash-based proxy here for Colab-friendly
     # operation; the canonical version (re-merging is_rand) ships in the
     # `corpus_build/` extractors and can be invoked separately.
 
     df = pd.read_parquet(shard_path)
 
-    # hash-based proxy split: deterministic, not the same as is_rand but
-    # estimates within-item ψᵢ stability across two random subsets. this is
-    # weaker than f4-as-pre-registered; documented in the result.
+    # Hash-based proxy split: deterministic, not the same as is_rand but
+    # estimates within-item ψᵢ stability across two random subsets. This is
+    # weaker than F4-as-pre-registered; documented in the result.
     #
-    # canonical f4 (when source csv is available): merge `is_rand` from
+    # CANONICAL F4 (when source CSV is available): merge `is_rand` from
     # log_random_*.csv vs log_standard_*.csv and split accordingly.
     rng = np.random.default_rng(0)
     n = len(df)

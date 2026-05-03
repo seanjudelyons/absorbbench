@@ -57,7 +57,7 @@ def run(shard_path: Path | str, min_encounters: int = 30, **kwargs) -> dict:
     hc_f = high_completion.loc[keep]
     cr_f = click_rate.loc[keep]
 
-    # partial correlation: residualise both psi_f and hc_f against cr_f, then correlate residuals.
+    # Partial correlation: residualise both psi_f and hc_f against cr_f, then correlate residuals.
     psi_res = _residuals(psi_f, cr_f)
     hc_res = _residuals(hc_f, cr_f)
     rho, p = stats.spearmanr(psi_res, hc_res)

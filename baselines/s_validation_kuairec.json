@@ -1,0 +1,53 @@
+{
+  "test": "S_validation_KuaiRec (out-of-sample for S3 selection rule)",
+  "shard": "KuaiRec big_matrix",
+  "n_rows": 12530806,
+  "exposure_regime": "forced-exposure (every user \u00d7 every video)",
+  "user_side_form": "c only (no per-encounter reflective acts)",
+  "candidates": [
+    {
+      "name": "S0",
+      "S_unique_values": 55,
+      "S_mean": 5.314999609612556,
+      "S_std": 2.471489614622093,
+      "ICC_full_psi": 0.5600779415159854,
+      "ICC_gap_over_numerator": 0.2514597483064361,
+      "n_items": 10438
+    },
+    {
+      "name": "S3",
+      "S_unique_values": 69,
+      "S_mean": 6.483922702163091,
+      "S_std": 2.5647368246516224,
+      "ICC_full_psi": 0.5833265043926665,
+      "ICC_gap_over_numerator": 0.27470831118311717,
+      "n_items": 10438
+    },
+    {
+      "name": "S_dur",
+      "S_unique_values": 7,
+      "S_mean": 1.4152240445958737,
+      "S_std": 1.0445700102154671,
+      "ICC_full_psi": 0.49385830087783283,
+      "ICC_gap_over_numerator": 0.18524010766828347,
+      "n_items": 10438
+    },
+    {
+      "name": "S_rand20",
+      "S_unique_values": 19,
+      "S_mean": 4.320085045656959,
+      "S_std": 0.07270797127696431,
+      "ICC_full_psi": 0.30975406727212235,
+      "ICC_gap_over_numerator": 0.0011358740625729835,
+      "n_items": 10438
+    }
+  ],
+  "icc_numerator_only_c": 0.30861819320954936,
+  "selection_rule": "S3 wins iff ICC_gap(S3) > ICC_gap(random-control) AND > ICC_gap(duration-only)",
+  "selection_rule_outcome": {
+    "S3_gap": 0.27470831118311717,
+    "random_control_gap": 0.0011358740625729835,
+    "duration_only_gap": 0.18524010766828347,
+    "S3_wins_under_rule": true
+  }
+}

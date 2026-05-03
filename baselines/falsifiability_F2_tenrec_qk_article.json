@@ -1,0 +1,20 @@
+{
+  "shard": "/content/work/corpus/spine/tenrec_qk_article.parquet",
+  "test": "F2_content_only",
+  "n_items_train": 153961,
+  "n_items_test_cold": 44018,
+  "mae_content_only": 0.028384860087903096,
+  "mae_global_mean": 0.02971711771861786,
+  "relative_mae_reduction": 0.04483132056512001,
+  "spearman_rho_content_vs_actual": 0.2753257053631502,
+  "threshold": 0.1,
+  "verdict": "FAIL",
+  "feature_set": "K, log(1+K), K^2",
+  "weights": {
+    "K": -0.0813409161643729,
+    "log_K": 0.38974875071212617,
+    "K_sq": 0.0019163960071942546,
+    "bias": -0.27594296876245744
+  },
+  "limitation": "Content features used: K only. Tag-distribution + body-text features deferred (would require modality-specific embedding pipelines on H100 in Phase 5)."
+}

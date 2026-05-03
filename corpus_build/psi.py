@@ -23,7 +23,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-# unified parquet schema (mp_05a §6.1, extended in §6.2 with `position`).
+# Unified parquet schema (mp_05a §6.1, extended in §6.2 with `position`).
 SCHEMA_COLS = [
     "user_id", "item_id", "modality", "dataset_source",
     "timestamp", "position",
@@ -68,7 +68,7 @@ def session_descriptors(rows: pd.DataFrame, session_id_col: str = "session_id") 
                 lp = np.log(np.clip(psi_arr, 1e-9, None))
             try:
                 m, b = np.polyfit(pos_arr, lp, 1)
-                A, beta = float(np.exp(b)), float(-m)  # ψ ≈ a exp(-β·pos)
+                A, beta = float(np.exp(b)), float(-m)  # ψ ≈ A exp(-β·pos)
             except (np.linalg.LinAlgError, ValueError):
                 A, beta = np.nan, np.nan
 

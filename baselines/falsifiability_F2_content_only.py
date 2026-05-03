@@ -44,12 +44,12 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
         return {"shard": str(shard_path), "test": "F2_content_only",
                 "skipped": "split too small"}
 
-    # per-item ψᵢ on train and test
+    # Per-item ψᵢ on train and test
     psi_train = train_df.groupby("item_id")["psi"].mean()
     psi_test = test_df.groupby("item_id")["psi"].mean()
 
-    # content features per item
-    # use k and (if available) modality and dataset_source as content cues.
+    # Content features per item
+    # Use K and (if available) modality and dataset_source as content cues.
     item_K_train = train_df.groupby("item_id")["K"].mean()
     item_K_test = test_df.groupby("item_id")["K"].mean()
 
@@ -64,8 +64,8 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
         return {"shard": str(shard_path), "test": "F2_content_only",
                 "skipped": "after item aggregation, too few items"}
 
-    # simple content-only model: linear regression of ψᵢ on k (and k-bin one-hot)
-    # k is in bits ∈ [1, ~12]; use raw k + log(k) + k^2 as features
+    # Simple content-only model: linear regression of ψᵢ on K (and K-bin one-hot)
+    # K is in bits ∈ [1, ~12]; use raw K + log(K) + K^2 as features
     X_train = np.column_stack([
         train_items["K"].to_numpy(),
         np.log1p(train_items["K"].to_numpy()),
@@ -81,7 +81,7 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
     ])
     y_test = test_items["psi"].to_numpy()
 
-    # closed-form ridge
+    # Closed-form ridge
     A = X_train.T @ X_train + 1e-3 * np.eye(X_train.shape[1])
     b = X_train.T @ y_train
     w = np.linalg.solve(A, b)

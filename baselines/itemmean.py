@@ -1,13 +1,13 @@
 """
-popularity baseline for the ψ-prediction task.
+itemmean baseline for the ψ-prediction task.
 
-for each item in the test set, predict the per-item train-set encounter
-count (the conventional recsys popularity statistic). items not seen in
-train get a count of zero. this is rank-equivalent to predicting log-count
-or any monotone transform; we report Spearman ρ on test ψ to make the
-ordering comparison clean.
+for each item in the test set, predict the per-item mean ψ computed on
+the train set. items not seen in train get the global train-set mean.
+this is the recsys-literature itemmean / itemavg baseline (sometimes
+miscalled "popularity" — popularity is count-based, not mean-of-target;
+see baselines/popularity.py for the count-based version).
 
-distinct from baselines/itemmean.py which predicts per-item train-mean ψ.
+trivial; cpu-only; runs in seconds on the full corpus.
 """
 
 from __future__ import annotations
@@ -23,27 +23,30 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def fit_predict(train: pd.DataFrame, test: pd.DataFrame) -> pd.Series:
-    item_count = train.groupby("item_id").size().astype(float)
-    pred = test["item_id"].map(item_count).fillna(0.0)
+    item_mean = train.groupby("item_id")["psi"].mean()
+    global_mean = float(train["psi"].mean())
+    pred = test["item_id"].map(item_mean).fillna(global_mean)
     return pred.astype(float)
 
 
 def metrics(y_true: pd.Series, y_pred: pd.Series) -> dict:
     y_true = y_true.astype(float).reset_index(drop=True)
     y_pred = y_pred.astype(float).reset_index(drop=True)
-    err = y_true - y_pred.rank(pct=True)  # rank-aligned error for MAE comparability
+    err = y_true - y_pred
     return {
         "n": int(len(y_true)),
-        "mae_rank_aligned": float(np.mean(np.abs(err))),
-        "spearman": float(pd.Series(y_true).corr(pd.Series(y_pred), method="spearman")),
+        "mae": float(np.mean(np.abs(err))),
+        "rmse": float(np.sqrt(np.mean(err ** 2))),
         "true_mean": float(y_true.mean()),
-        "pred_mean_count": float(y_pred.mean()),
+        "pred_mean": float(y_pred.mean()),
         "true_std": float(y_true.std()),
+        "pred_std": float(y_pred.std()),
+        "spearman": float(pd.Series(y_true).corr(pd.Series(y_pred), method="spearman")),
     }
 
 
 def run(corpus_root: Path = ROOT / "corpus") -> dict:
-    """run popularity baseline across all spine + appendix shards under each split."""
+    """Run popularity baseline across all spine + appendix shards under each split."""
     from corpus_build.splits import items_split, time_split, users_split
 
     results = {}
@@ -69,15 +72,14 @@ def run(corpus_root: Path = ROOT / "corpus") -> dict:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--corpus", default=str(ROOT / "corpus"))
-    ap.add_argument("--out", default=str(ROOT / "baselines" / "results_popularity_count.json"))
+    ap.add_argument("--out", default=str(ROOT / "baselines" / "results_popularity.json"))
     args = ap.parse_args()
 
     results = run(Path(args.corpus))
     Path(args.out).write_text(json.dumps(results, indent=2))
-    print(f"wrote {args.out}")
+    print(f"Wrote {args.out}")
     for k, v in results.items():
-        sp = v.get("spearman", float("nan"))
-        print(f"  {k}: Spearman={sp:.4f}, n={v['n']}")
+        print(f"  {k}: MAE={v['mae']:.4f}, RMSE={v['rmse']:.4f}, Spearman={v['spearman']:.4f}, n={v['n']}")
 
 
 if __name__ == "__main__":

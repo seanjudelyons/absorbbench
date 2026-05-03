@@ -46,8 +46,8 @@
     "wd": "https://www.wikidata.org/wiki/"
   },
   "@type": "sc:Dataset",
-  "name": "AbsorbBench (Track A redistributed shards)",
-  "description": "Track A of the AbsorbBench corpus: KuaiRand-Pure (CC BY-SA 4.0; 2,622,668 short-form video interactions) and KuaiRec (CC BY 4.0; 4,676,570 forced-exposure short-form video interactions), redistributed as parquet shards with the per-item engagement coefficient psi(u, i, t) = c * (1 + R_norm) / H(i) pre-computed for every (u, i, t) tuple. Track B (Tenrec QK-article, QB-video, QK-video; CC BY-NC 4.0 with portal license-acceptance wrapper) is not redistributed; it ships as a build-from-source pipeline at the GitHub repository.",
+  "name": "AbsorbBench-Video (Track A redistributed shards)",
+  "description": "Track A redistributed shards of AbsorbBench-Video: KuaiRand-Pure (CC BY-SA 4.0; 2,622,668 short-form video interactions, ships canonical is_rand indicator and two psi variants psi_S0 and psi_S3) and KuaiRec (CC BY 4.0; 4,676,570 forced-exposure short-form video interactions). AbsorbBench-Text (Tenrec QK-article spine) is distributed separately via the build-from-source Track B pipeline due to license incompatibility.",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
   "license": "https://creativecommons.org/licenses/by-sa/4.0/",
   "url": "https://doi.org/10.5281/zenodo.19965136",
@@ -121,18 +121,201 @@
       "name": "kuairand_pure",
       "description": "One row per (u, i, t) tuple in the KuaiRand-Pure shard.",
       "field": [
-        {"@type": "cr:Field", "@id": "kuairand_pure/user_id", "name": "user_id", "description": "Namespaced user identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "user_id"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/item_id", "name": "item_id", "description": "Namespaced item identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "item_id"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/modality", "name": "modality", "description": "short_video for this shard.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "modality"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/dataset_source", "name": "dataset_source", "description": "Source dataset label (kuairand_pure).", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "dataset_source"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/timestamp", "name": "timestamp", "description": "Encounter timestamp.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "timestamp"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/position", "name": "position", "description": "Within-session encounter position.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "position"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/c", "name": "c", "description": "Engagement-time fraction T_engaged / T_total in [0, 1].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "c"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/R_count", "name": "R_count", "description": "Per-(u, i, t) reflective-act count, integer >= 0.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "R_count"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/K_raw", "name": "K_raw", "description": "Pre-floor per-item content entropy in bits (Shannon).", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "K_raw"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/K", "name": "K", "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "K"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/R_norm", "name": "R_norm", "description": "Reflective intensity in [0, 1] = min(R_count, R_p90_modality) / R_p90_modality.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "R_norm"}}},
-        {"@type": "cr:Field", "@id": "kuairand_pure/psi", "name": "psi", "description": "Per-encounter engagement coefficient c*(1+R_norm)/K, bounded in [0, 2].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairand_pure-parquet"}, "extract": {"column": "psi"}}}
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/user_id",
+          "name": "user_id",
+          "description": "Namespaced user identifier.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "user_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/item_id",
+          "name": "item_id",
+          "description": "Namespaced item identifier.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "item_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/modality",
+          "name": "modality",
+          "description": "short_video for this shard.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "modality"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/dataset_source",
+          "name": "dataset_source",
+          "description": "Source dataset label (kuairand_pure).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "dataset_source"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/timestamp",
+          "name": "timestamp",
+          "description": "Encounter timestamp.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "timestamp"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/position",
+          "name": "position",
+          "description": "Within-session encounter position.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "position"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/c",
+          "name": "c",
+          "description": "Engagement-time fraction T_engaged / T_total in [0, 1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "c"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/R_count",
+          "name": "R_count",
+          "description": "Per-(u, i, t) reflective-act count, integer >= 0.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "R_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/K_raw",
+          "name": "K_raw",
+          "description": "Pre-floor per-item content entropy in bits (Shannon).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "K_raw"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/K",
+          "name": "K",
+          "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "K"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/R_norm",
+          "name": "R_norm",
+          "description": "Reflective intensity in [0, 1] = min(R_count, R_p90_modality) / R_p90_modality.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "R_norm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/psi",
+          "name": "psi",
+          "description": "Per-encounter engagement coefficient c*(1+R_norm)/K, bounded in [0, 2].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "psi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/psi_S3",
+          "name": "psi_S3",
+          "description": "Per-encounter engagement coefficient under the joint-marginal S3 (tag x log-duration bucket); see paper Appendix D.4. Bounded in [0, 2].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "psi_S3"
+            }
+          }
+        }
       ]
     },
     {
@@ -141,18 +324,186 @@
       "name": "kuairec",
       "description": "One row per (u, i, t) tuple in the KuaiRec shard.",
       "field": [
-        {"@type": "cr:Field", "@id": "kuairec/user_id", "name": "user_id", "description": "Namespaced user identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "user_id"}}},
-        {"@type": "cr:Field", "@id": "kuairec/item_id", "name": "item_id", "description": "Namespaced item identifier.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "item_id"}}},
-        {"@type": "cr:Field", "@id": "kuairec/modality", "name": "modality", "description": "short_video for this shard.", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "modality"}}},
-        {"@type": "cr:Field", "@id": "kuairec/dataset_source", "name": "dataset_source", "description": "Source dataset label (kuairec).", "dataType": "sc:Text", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "dataset_source"}}},
-        {"@type": "cr:Field", "@id": "kuairec/timestamp", "name": "timestamp", "description": "Encounter timestamp.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "timestamp"}}},
-        {"@type": "cr:Field", "@id": "kuairec/position", "name": "position", "description": "Within-session encounter position.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "position"}}},
-        {"@type": "cr:Field", "@id": "kuairec/c", "name": "c", "description": "Engagement-time fraction T_engaged / T_total in [0, 1].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "c"}}},
-        {"@type": "cr:Field", "@id": "kuairec/R_count", "name": "R_count", "description": "Per-(u, i, t) reflective-act count, integer >= 0.", "dataType": "sc:Integer", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "R_count"}}},
-        {"@type": "cr:Field", "@id": "kuairec/K_raw", "name": "K_raw", "description": "Pre-floor per-item content entropy in bits (Shannon).", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "K_raw"}}},
-        {"@type": "cr:Field", "@id": "kuairec/K", "name": "K", "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "K"}}},
-        {"@type": "cr:Field", "@id": "kuairec/R_norm", "name": "R_norm", "description": "Reflective intensity in [0, 1] = min(R_count, R_p90_modality) / R_p90_modality.", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "R_norm"}}},
-        {"@type": "cr:Field", "@id": "kuairec/psi", "name": "psi", "description": "Per-encounter engagement coefficient c*(1+R_norm)/K, bounded in [0, 2].", "dataType": "sc:Float", "source": {"fileObject": {"@id": "kuairec-parquet"}, "extract": {"column": "psi"}}}
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/user_id",
+          "name": "user_id",
+          "description": "Namespaced user identifier.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "user_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/item_id",
+          "name": "item_id",
+          "description": "Namespaced item identifier.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "item_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/modality",
+          "name": "modality",
+          "description": "short_video for this shard.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "modality"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/dataset_source",
+          "name": "dataset_source",
+          "description": "Source dataset label (kuairec).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "dataset_source"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/timestamp",
+          "name": "timestamp",
+          "description": "Encounter timestamp.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "timestamp"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/position",
+          "name": "position",
+          "description": "Within-session encounter position.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "position"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/c",
+          "name": "c",
+          "description": "Engagement-time fraction T_engaged / T_total in [0, 1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "c"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/R_count",
+          "name": "R_count",
+          "description": "Per-(u, i, t) reflective-act count, integer >= 0.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "R_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/K_raw",
+          "name": "K_raw",
+          "description": "Pre-floor per-item content entropy in bits (Shannon).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "K_raw"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/K",
+          "name": "K",
+          "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "K"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/R_norm",
+          "name": "R_norm",
+          "description": "Reflective intensity in [0, 1] = min(R_count, R_p90_modality) / R_p90_modality.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "R_norm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairec/psi",
+          "name": "psi",
+          "description": "Per-encounter engagement coefficient c*(1+R_norm)/K, bounded in [0, 2].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairec-parquet"
+            },
+            "extract": {
+              "column": "psi"
+            }
+          }
+        }
       ]
     }
   ],

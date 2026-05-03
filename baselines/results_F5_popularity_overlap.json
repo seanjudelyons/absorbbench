@@ -1,0 +1,41 @@
+{
+  "test": "F5_popularity_overlap",
+  "definition": "per-item Spearman rho between training-set encounter count and per-item mean psi, on items meeting the encounter floor",
+  "preregistered_verdict_bands": {
+    "POPULARITY_EQUALS_FORMULA": "rho > 0.95",
+    "MODERATE_OVERLAP": "0.6 <= rho <= 0.95",
+    "FORMULA_DIFFERS_FROM_POPULARITY": "rho < 0.6"
+  },
+  "kuairand_pure": {
+    "min_enc_5": {
+      "n_items": 7582,
+      "spearman_rho": 0.4926,
+      "pearson_r_log_count": 0.3980,
+      "p_value": 0.0,
+      "verdict": "FORMULA_DIFFERS_FROM_POPULARITY"
+    },
+    "min_enc_10": {
+      "n_items": 7580,
+      "spearman_rho": 0.4928,
+      "pearson_r_log_count": 0.3996,
+      "p_value": 0.0,
+      "verdict": "FORMULA_DIFFERS_FROM_POPULARITY"
+    }
+  },
+  "tenrec_qk_article": {
+    "min_enc_5": {
+      "n_items": 139739,
+      "spearman_rho": 0.1355,
+      "pearson_r_log_count": 0.1371,
+      "p_value": 0.0,
+      "verdict": "FORMULA_DIFFERS_FROM_POPULARITY"
+    },
+    "min_enc_10": {
+      "n_items": 113810,
+      "spearman_rho": 0.0989,
+      "pearson_r_log_count": 0.1095,
+      "p_value": 1.96e-245,
+      "verdict": "FORMULA_DIFFERS_FROM_POPULARITY"
+    }
+  }
+}

@@ -23,7 +23,7 @@ def _hash_to_bucket(values: pd.Series, seed: int = 0, modulus: int = 1000) -> pd
 
     For a Series of ~10^7 values, this should run in seconds, not minutes.
     """
-    # compute hash on unique values only, then map back.
+    # Compute hash on unique values only, then map back.
     unique = values.unique()
 
     def _h(s: str) -> int:

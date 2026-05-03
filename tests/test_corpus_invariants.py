@@ -25,7 +25,7 @@ from corpus_build.psi import SCHEMA_COLS, compute_psi, k_floor, normalise_R
 
 
 # ────────────────────────────────────────────────────────────────────
-# §11.3 r1 — k floor
+# §11.3 R1 — K floor
 # ────────────────────────────────────────────────────────────────────
 def test_k_floor():
     assert k_floor(0) == 1.0
@@ -68,7 +68,7 @@ def test_psi_d2_monotonicity():
 
 
 # ────────────────────────────────────────────────────────────────────
-# §10.1 r̃_norm bounds
+# §10.1 R̃_norm bounds
 # ────────────────────────────────────────────────────────────────────
 def test_R_norm_bounds():
     R_count = pd.Series([0, 1, 2, 5, 10, 20, 100])
@@ -78,7 +78,7 @@ def test_R_norm_bounds():
 
 
 # ────────────────────────────────────────────────────────────────────
-# schema invariants
+# Schema invariants
 # ────────────────────────────────────────────────────────────────────
 def test_schema_columns():
     assert SCHEMA_COLS == [
@@ -89,7 +89,7 @@ def test_schema_columns():
 
 
 # ────────────────────────────────────────────────────────────────────
-# corpus shard invariants (skips if corpus not built)
+# Corpus shard invariants (skips if corpus not built)
 # ────────────────────────────────────────────────────────────────────
 def test_shard_schema():
     corpus = ROOT / "corpus" / "spine"
@@ -106,7 +106,7 @@ def test_shard_schema():
             n_unreadable += 1
             continue
         assert list(df.columns) == SCHEMA_COLS, f"{p}: schema mismatch {list(df.columns)}"
-        # bounds
+        # Bounds
         assert df["c"].between(0, 1).all(), f"{p}: c not in [0, 1]"
         assert df["R_norm"].between(0, 1).all(), f"{p}: R_norm not in [0, 1]"
         assert (df["K"] >= 1.0).all(), f"{p}: K floor violated"
@@ -130,14 +130,14 @@ def test_pre_registered_drops():
     for s in m["shards"]:
         sources_in_corpus.update(s["dataset_sources"])
 
-    # pre-registered drops per mp_05 / mp_05a phase 1 findings
+    # Pre-registered drops per mp_05 / mp_05a Phase 1 Findings
     DROPPED = {"EB-NeRD", "LastFM-1K", "Tenrec-QB-article"}
     intersection = DROPPED & sources_in_corpus
     assert not intersection, f"Dropped datasets in corpus: {intersection}"
 
 
 # ────────────────────────────────────────────────────────────────────
-# run all when called as a script
+# Run all when called as a script
 # ────────────────────────────────────────────────────────────────────
 def main():
     n_pass, n_fail = 0, 0

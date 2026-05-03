@@ -1,0 +1,20 @@
+{
+  "shard": "/content/work/corpus/spine/kuairand_pure.parquet",
+  "test": "F2_content_only",
+  "n_items_train": 5389,
+  "n_items_test_cold": 1423,
+  "mae_content_only": 0.04184605380453244,
+  "mae_global_mean": 0.04584761692810071,
+  "relative_mae_reduction": 0.08727963178203155,
+  "spearman_rho_content_vs_actual": 0.3372739499024632,
+  "threshold": 0.1,
+  "verdict": "FAIL",
+  "feature_set": "K, log(1+K), K^2",
+  "weights": {
+    "K": 0.14897866660500772,
+    "log_K": -0.6739777709019176,
+    "K_sq": -0.004728573599699241,
+    "bias": 0.6390243334210919
+  },
+  "limitation": "Content features used: K only. Tag-distribution + body-text features deferred (would require modality-specific embedding pipelines on H100 in Phase 5)."
+}
