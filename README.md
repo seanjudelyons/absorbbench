@@ -27,9 +27,9 @@ tests/          corpus invariant smoke tests
 
 source datasets aren't bundled. you have to grab them:
 
-- **KuaiRand-Pure** — https://kuairand.com/ (direct download, CC BY-SA 4.0)
+- **KuaiRand-Pure** — https://kuairand.com/ (direct download, CC BY 4.0)
 - **Tenrec QK-article** — https://static.qq.com/qbs/Tenrec/ (manual application via portal; took me about a week)
-- **KuaiRec** — https://kuairec.com/ (direct download)
+- **KuaiRec** — https://kuairec.com/ (direct download, CC BY-SA 4.0)
 - **Tenrec QK-video, QB-video** — same Tenrec portal as above
 
 EB-NeRD was originally going to be the danish-news shard but got dropped after S-validation failed (5 different S_text formulations all failed convergent + LIX-anchor). see paper §3 for the drop rule.
@@ -84,7 +84,7 @@ F1–F7 are stability, overlap, and external-anchor analyses, not falsifiability
 ## License
 
 code in this repo: Apache 2.0 (LICENSE file).
-the computed ψ column inherits the source dataset's license (CC BY-SA 4.0 for kuairand; custom non-commercial for tenrec).
+the computed ψ column inherits each source dataset's license: CC BY 4.0 for KuaiRand-Pure, CC BY-SA 4.0 for KuaiRec (ShareAlike applies), CC BY-NC 4.0 with portal-acceptance wrapper for Tenrec.
 
 ## Cite
 
