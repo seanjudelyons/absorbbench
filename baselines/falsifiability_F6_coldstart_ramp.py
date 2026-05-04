@@ -182,12 +182,12 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
     rng = np.random.default_rng(seed)
 
     # Numerator-only sanity check: noesis = c * (1 + R_norm), the user-side
-    # term with H(i) divided out. Reviewer-flagged H(i)-leakage concern:
-    # because H(i) is constant per item, F6 split-half ρ and ICC on full ψ
-    # could in principle be inflated by the constant 1/H(i) factor rather
+    # term with S(i) divided out. Reviewer-flagged S(i)-leakage concern:
+    # because S(i) is constant per item, F6 split-half ρ and ICC on full ψ
+    # could in principle be inflated by the constant 1/S(i) factor rather
     # than by stability of the user-side numerator. Computing the same
     # ramp on noesis-only isolates whether the cold-start informativeness
-    # claim survives without the H(i) lever.
+    # claim survives without the S(i) lever.
     df = df.assign(noesis=df["c"] * (1.0 + df["R_norm"]))
 
     # Build item -> (n, psi_arr) and item -> (n, noesis_arr).
@@ -234,8 +234,8 @@ def run(shard_path: Path | str, seed: int = 0, **kwargs) -> dict:
         "numerator_only_sanity_check": {
             "description": (
                 "Same ICC and split-half ramp on noesis = c * (1 + R_norm), "
-                "with H(i) divided out. Tests whether the cold-start "
-                "informativeness claim depends on the constant 1/H(i) "
+                "with S(i) divided out. Tests whether the cold-start "
+                "informativeness claim depends on the constant 1/S(i) "
                 "factor per item or on the user-side average alone."
             ),
             "icc": icc_noesis,

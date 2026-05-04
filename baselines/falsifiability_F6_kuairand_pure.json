@@ -95,7 +95,7 @@
     "n_warm": 7556
   },
   "numerator_only_sanity_check": {
-    "description": "Same ICC and split-half ramp on noesis = c * (1 + R_norm), with H(i) divided out. Tests whether the cold-start informativeness claim depends on the constant 1/H(i) factor per item or on the user-side average alone.",
+    "description": "Same ICC and split-half ramp on noesis = c * (1 + R_norm), with S(i) divided out. Tests whether the cold-start informativeness claim depends on the constant 1/S(i) factor per item or on the user-side average alone.",
     "icc": {
       "n_items_for_icc": 7583,
       "sigma_between": 0.06349724579676497,

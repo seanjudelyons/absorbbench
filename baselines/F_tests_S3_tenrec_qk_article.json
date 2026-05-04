@@ -1,5 +1,5 @@
 {
-  "shard": "/Users/seanlyons/Downloads/Phil Tech/datasets/tenrec/QK-article.csv",
+  "shard": "datasets/tenrec/QK-article.csv",
   "n_rows": 46111728,
   "candidates": [
     {

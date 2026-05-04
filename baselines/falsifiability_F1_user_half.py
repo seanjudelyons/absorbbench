@@ -29,9 +29,9 @@ def run(shard_path: Path | str, min_encounters: int = 30, seed: int = 0,
     df = pd.read_parquet(shard_path)
     rng = np.random.default_rng(seed)
 
-    # noesis_arr column: c * (1 + R_norm), the user-side term with H(i)
+    # noesis_arr column: c * (1 + R_norm), the user-side term with S(i)
     # divided out. Reviewer-flagged sanity check: F1 on full psi may be
-    # dominated by the constant 1/H(i) factor per item; computing the same
+    # dominated by the constant 1/S(i) factor per item; computing the same
     # within-item user-half consistency on noesis-only isolates whether the
     # *user-side* average is stable across user halves.
     df = df.assign(noesis=df["c"] * (1.0 + df["R_norm"]))

@@ -47,29 +47,16 @@
   },
   "@type": "sc:Dataset",
   "name": "AbsorbBench-Video (Track A redistributed shards)",
-  "description": "Track A redistributed shards of AbsorbBench-Video: KuaiRand-Pure (CC BY-SA 4.0; 2,622,668 short-form video interactions, ships canonical is_rand indicator and two psi variants psi_S0 and psi_S3) and KuaiRec (CC BY 4.0; 4,676,570 forced-exposure short-form video interactions). AbsorbBench-Text (Tenrec QK-article spine) is distributed separately via the build-from-source Track B pipeline due to license incompatibility.",
+  "description": "Track A redistributed shards of AbsorbBench-Video: KuaiRand-Pure (CC BY-SA 4.0; 2,622,668 short-form video interactions, ships canonical is_rand indicator and two psi variants psi_S0 and psi_S3) and KuaiRec (CC BY-SA 4.0; 4,676,570 forced-exposure short-form video interactions; the ShareAlike obligation is preserved at the deposit level). AbsorbBench-Text (Tenrec QK-article spine) is distributed separately via the build-from-source Track B pipeline due to license incompatibility between CC BY-SA 4.0 (KuaiRec) and CC BY-NC 4.0 (Tenrec).",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
   "license": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "url": "https://doi.org/10.5281/zenodo.19965136",
+  "url": "https://anonymous.4open.science/r/absorbbench-C138/",
   "version": "1.0.0",
   "datePublished": "2026-05-02",
   "creator": [
     {
       "@type": "Person",
-      "name": "Sean Lyons",
-      "url": "https://orcid.org/0009-0007-8518-0504",
-      "affiliation": {
-        "@type": "Organization",
-        "name": "Australian National University"
-      }
-    },
-    {
-      "@type": "Person",
-      "name": "Marcus Hutter",
-      "affiliation": {
-        "@type": "Organization",
-        "name": "Australian National University"
-      }
+      "name": "Anonymous"
     }
   ],
   "publisher": {
@@ -88,27 +75,27 @@
   "inLanguage": "en",
   "isAccessibleForFree": true,
   "isLiveDataset": false,
-  "citeAs": "Lyons, S., & Hutter, M. (2026). AbsorbBench (Track A redistributed shards): KuaiRand-Pure + KuaiRec parquet with per-item engagement coefficient psi (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.19965136",
+  "citeAs": "Anonymous (2026). AbsorbBench (Track A redistributed shards): KuaiRand-Pure + KuaiRec parquet with per-item engagement coefficient psi (Version 1.0.0) [Data set]. DOI redacted for double-blind review.",
   "sameAs": [
-    "https://github.com/seanjudelyons/absorbbench"
+    "https://anonymous.4open.science/r/absorbbench-C138/"
   ],
   "distribution": [
     {
       "@type": "cr:FileObject",
       "@id": "kuairand_pure-parquet",
       "name": "kuairand_pure.parquet",
-      "description": "KuaiRand-Pure (CC BY-SA 4.0): 2,622,668 short-form video (u, i, t) interactions on Kuaishou with per-row engagement coefficient psi pre-computed.",
-      "contentUrl": "https://zenodo.org/records/19965136/files/kuairand_pure.parquet",
+      "description": "KuaiRand-Pure (CC BY-SA 4.0): 2,622,668 short-form video (u, i, t) interactions on Kuaishou with per-row engagement coefficient psi pre-computed; also ships psi_S3 under the joint-marginal S3 = -log_2 P(tag, log10(video_duration_ms) bucket) per paper Appendix D.4.",
+      "contentUrl": "https://zenodo.org/records/REDACTED-FOR-DOUBLE-BLIND-REVIEW/files/kuairand_pure.parquet",
       "encodingFormat": "application/vnd.apache.parquet",
-      "sha256": "4592bfcce2c358c9f83df23f07a18ce51f4ab09f5454826936bc992c8b0ee330",
-      "contentSize": "64864639 B"
+      "sha256": "2c70479c95311f8b59de100c9b23a0279403664b65f8f8343180c1518736c0ab",
+      "contentSize": "88776902 B"
     },
     {
       "@type": "cr:FileObject",
       "@id": "kuairec-parquet",
       "name": "kuairec.parquet",
-      "description": "KuaiRec (CC BY 4.0): 4,676,570 forced-exposure short-form video (u, i, t) interactions on Kuaishou with per-row engagement coefficient psi pre-computed.",
-      "contentUrl": "https://zenodo.org/records/19965136/files/kuairec.parquet",
+      "description": "KuaiRec (CC BY-SA 4.0): 4,676,570 forced-exposure short-form video (u, i, t) interactions on Kuaishou with per-row engagement coefficient psi pre-computed.",
+      "contentUrl": "https://zenodo.org/records/REDACTED-FOR-DOUBLE-BLIND-REVIEW/files/kuairec.parquet",
       "encodingFormat": "application/vnd.apache.parquet",
       "sha256": "b88a3278a3b3c9ac47a0dfa41c8fce557a97febf5711240ec59481473903db1b",
       "contentSize": "114471263 B"
@@ -185,8 +172,8 @@
           "@type": "cr:Field",
           "@id": "kuairand_pure/timestamp",
           "name": "timestamp",
-          "description": "Encounter timestamp.",
-          "dataType": "sc:Integer",
+          "description": "Encounter timestamp (parquet logical type timestamp[ms]; values are unix-epoch milliseconds).",
+          "dataType": "sc:DateTime",
           "source": {
             "fileObject": {
               "@id": "kuairand_pure-parquet"
@@ -245,7 +232,7 @@
           "@type": "cr:Field",
           "@id": "kuairand_pure/K_raw",
           "name": "K_raw",
-          "description": "Pre-floor per-item content entropy in bits (Shannon).",
+          "description": "Pre-floor per-item content surprisal in bits (paper notation: S_raw).",
           "dataType": "sc:Float",
           "source": {
             "fileObject": {
@@ -260,7 +247,7 @@
           "@type": "cr:Field",
           "@id": "kuairand_pure/K",
           "name": "K",
-          "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.",
+          "description": "Floored per-item content surprisal max(K_raw, 1) in bits. Paper notation: S = max(S_raw, 1).",
           "dataType": "sc:Float",
           "source": {
             "fileObject": {
@@ -303,9 +290,39 @@
         },
         {
           "@type": "cr:Field",
+          "@id": "kuairand_pure/S3_raw",
+          "name": "S3_raw",
+          "description": "Pre-floor per-item content surprisal under the joint marginal S3 = -log_2 P(tag, log10(video_duration_ms) // 0.5 bucket), in bits. NaN for items with missing tag or duration metadata.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "S3_raw"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "kuairand_pure/S3",
+          "name": "S3",
+          "description": "Floored per-item content surprisal max(S3_raw, 1) in bits. Cold-start-meta items (S3_raw NaN) use the 1-bit floor; psi_S3 is then c*(1+R_norm).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "kuairand_pure-parquet"
+            },
+            "extract": {
+              "column": "S3"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
           "@id": "kuairand_pure/psi_S3",
           "name": "psi_S3",
-          "description": "Per-encounter engagement coefficient under the joint-marginal S3 (tag x log-duration bucket); see paper Appendix D.4. Bounded in [0, 2].",
+          "description": "Per-encounter engagement coefficient under the joint-marginal S3 (tag x log-duration bucket); see paper Appendix D.4. psi_S3 = c * (1 + R_norm) / S3, bounded in [0, 2].",
           "dataType": "sc:Float",
           "source": {
             "fileObject": {
@@ -343,7 +360,7 @@
           "@type": "cr:Field",
           "@id": "kuairec/item_id",
           "name": "item_id",
-          "description": "Namespaced item identifier.",
+          "description": "Namespaced item identifier (renamed from KuaiRec source column video_id; prefix kr_ added for cross-shard uniformity).",
           "dataType": "sc:Text",
           "source": {
             "fileObject": {
@@ -388,8 +405,8 @@
           "@type": "cr:Field",
           "@id": "kuairec/timestamp",
           "name": "timestamp",
-          "description": "Encounter timestamp.",
-          "dataType": "sc:Integer",
+          "description": "Encounter timestamp (parquet logical type timestamp[ms]; values are unix-epoch milliseconds).",
+          "dataType": "sc:DateTime",
           "source": {
             "fileObject": {
               "@id": "kuairec-parquet"
@@ -448,7 +465,7 @@
           "@type": "cr:Field",
           "@id": "kuairec/K_raw",
           "name": "K_raw",
-          "description": "Pre-floor per-item content entropy in bits (Shannon).",
+          "description": "Pre-floor per-item content surprisal in bits (paper notation: S_raw).",
           "dataType": "sc:Float",
           "source": {
             "fileObject": {
@@ -463,7 +480,7 @@
           "@type": "cr:Field",
           "@id": "kuairec/K",
           "name": "K",
-          "description": "Floored per-item content entropy max(K_raw, 1) in bits. Paper renames this H.",
+          "description": "Floored per-item content surprisal max(K_raw, 1) in bits. Paper notation: S = max(S_raw, 1).",
           "dataType": "sc:Float",
           "source": {
             "fileObject": {
@@ -507,8 +524,8 @@
       ]
     }
   ],
-  "rai:dataCollection": "Source datasets KuaiRand-Pure and KuaiRec were downloaded from their official portals (https://kuairand.com, https://kuairec.com). The AbsorbBench build pipeline computes psi per the closed-form expression and writes per-shard parquet files with sha256-stable manifests. Source dataset time frames: KuaiRand-Pure 8 days in April 2022; KuaiRec 8 days in 2022. AbsorbBench performs only post-hoc computation on already-public data and does not collect new human-subject data.",
-  "rai:dataPreprocessingProtocol": "Per-modality signal extraction maps source columns to a unified schema. Engagement-time fraction c = play_time / video_duration. Reflective intensity R_norm = min(R_count, R_p90_modality) / R_p90_modality, capped at 1. Content entropy H(i) = -log_2 P(tag(i) | modality) with a 1-bit floor (R1). psi(u, i, t) = c * (1 + R_norm) / H(i), bounded in [0, 2].",
+  "rai:dataCollection": "Source datasets KuaiRand-Pure and KuaiRec were downloaded from their official portals (https://kuairand.com, https://kuairec.com). The AbsorbBench build pipeline computes psi per the closed-form expression and writes per-shard parquet files with sha256-stable manifests. Source dataset time frames: KuaiRand-Pure ~30 days, April 8 to May 8, 2022 (log_standard_4_08_to_4_21 standard-exposure split + log_random_4_22_to_5_08 random-exposure split; per kuairand.com); KuaiRec ~62 days, July 5 to September 5, 2020 on Kuaishou (per Gao et al. 2022, KuaiRec paper §3 / kuairec.com). AbsorbBench performs only post-hoc computation on already-public data and does not collect new human-subject data.",
+  "rai:dataPreprocessingProtocol": "Per-modality signal extraction maps source columns to a unified schema. Engagement-time fraction c = play_time / video_duration. Reflective intensity R_norm = min(R_count, R_p90_modality) / R_p90_modality, capped at 1. Content surprisal S(i) = -log_2 P_m(tag(i)) with a 1-bit floor (R1). psi(u, i, t) = c * (1 + R_norm) / S(i), bounded in [0, 2].",
   "rai:dataAnnotationProtocol": "No human annotation was performed. psi is a closed-form computation over per-(u, i, t) signals available in the source datasets.",
   "rai:dataAnnotationPlatform": "N/A. psi is computed by a deterministic pipeline; no annotation platform is involved.",
   "rai:dataAnnotationAnalysis": "N/A. psi is deterministic; no inter-annotator agreement applies.",
@@ -518,7 +535,7 @@
     "Ranker-served selection bias: the encounter set on KuaiRand-Pure is determined by the platform's ranker. KuaiRand-Pure ships a random-exposure subset alongside the ranker-served slice; cross-slice persistence (F4 in the paper) bounds this confounding.",
     "Forced-exposure bias on KuaiRec: KuaiRec is a fully-observed every-user-by-every-item interaction matrix obtained by directing users to a specific feed for a fixed period. This is closer to randomised exposure than typical observational logs but introduces a different bias: users were aware they were participating.",
     "Platform and language scope: both shards are from Kuaishou (short-form video), serving primarily Chinese-language users in 2022. psi distributions may not generalise to other platforms, languages, or eras.",
-    "Tag-distribution bias in H(i): per-modality content entropy is computed under the source dataset's empirical tag marginal. Items in different distributional contexts would receive different H values."
+    "Tag-distribution bias in S(i): per-modality content surprisal is computed under the source dataset's empirical tag marginal. Items in different distributional contexts would receive different S values."
   ],
   "rai:dataLimitations": "Two platforms (Kuaishou KuaiRand-Pure + KuaiRec), one language (Chinese), one modality (short-form video) for this Track-A deposit. The corpus's text/news modality (Tenrec QK-article) is shipped as a build-from-source pipeline, not redistributed here. Cross-modality numeric psi comparison requires modality-relative normalisation and is not supported by this Track-A deposit alone.",
   "rai:dataUseCases": [
@@ -527,7 +544,7 @@
     "Engagement-quality vs engagement-volume calibration: psi distinguishes per-item engagement-quality from raw count statistics.",
     "Counterfactual evaluation using KuaiRand-Pure's random-exposure slice."
   ],
-  "rai:dataReleaseMaintenancePlan": "Maintained by the authors via the public GitHub issue tracker at https://github.com/seanjudelyons/absorbbench. Updates that change psi values (e.g., new H(i) estimators) bump the major version and ship as a separate Zenodo deposit; the prior version remains accessible via the Zenodo concept-DOI. Errata tracked in ERRATA.md.",
+  "rai:dataReleaseMaintenancePlan": "Maintained by the authors via the public issue tracker on the anonymous review mirror at https://anonymous.4open.science/r/absorbbench-C138/ (full GitHub URL released upon de-anonymisation). Updates that change psi values (e.g., new S(i) estimators) bump the major version and ship as a separate Zenodo deposit; the prior version remains accessible via the Zenodo concept-DOI (DOI redacted for double-blind review). Errata tracked in ERRATA.md.",
   "rai:dataIsSyntheticTesting": false,
   "rai:dataIsAIGenerated": false,
   "rai:provenance": [
@@ -535,15 +552,15 @@
       "@type": "Dataset",
       "name": "KuaiRand-Pure",
       "url": "https://kuairand.com",
-      "identifier": "10.1145/3543507.3583240",
+      "identifier": "10.1145/3511808.3557624",
       "license": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
       "@type": "Dataset",
       "name": "KuaiRec",
       "url": "https://kuairec.com",
-      "identifier": "10.1145/3477495.3531879",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "identifier": "10.1145/3511808.3557220",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
     }
   ]
 }

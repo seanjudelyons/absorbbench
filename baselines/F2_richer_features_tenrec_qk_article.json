@@ -1,6 +1,6 @@
 {
   "test": "F2_richer_features (Tenrec QK-article)",
-  "shard": "/Users/seanlyons/Downloads/Phil Tech/datasets/tenrec/QK-article.csv",
+  "shard": "datasets/tenrec/QK-article.csv",
   "warm_min_encounters": 10,
   "cold_max_encounters": 5,
   "n_warm_train_items": 113810,

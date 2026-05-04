@@ -73,7 +73,7 @@ F1–F7 are stability, overlap, and external-anchor analyses, not falsifiability
 - invariant tests: 8/8 passing
 - baselines: done. final 3-seed numbers from the H100 run are in the paper (Table 4).
 - paper: submitted to NeurIPS 2026 E&D Track (notification 2026-09-24).
-- zenodo deposit: live at https://doi.org/10.5281/zenodo.19965136 (Track A: KuaiRand-Pure + KuaiRec).
+- zenodo deposit: anonymous archival deposit (DOI redacted for double-blind review; Track A: KuaiRand-Pure + KuaiRec).
 
 ## Notes / known issues
 
@@ -90,4 +90,4 @@ the computed ψ column inherits each source dataset's license: CC BY-SA 4.0 for 
 
 bibtex will be added after acceptance / arXiv posting. for now:
 
-> Sean Lyons. AbsorbBench: per-item engagement on observational recommender logs. NeurIPS 2026 E&D Track (under review). 2026.
+> Anonymous. AbsorbBench: per-item engagement on observational recommender logs. NeurIPS 2026 E&D Track (under review). 2026.

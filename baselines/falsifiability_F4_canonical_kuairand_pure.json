@@ -1,6 +1,6 @@
 {
   "test": "F4_canonical (is_rand merged from source CSVs)",
-  "shard": "/Users/seanlyons/Downloads/Phil Tech/corpus/spine/kuairand_pure.parquet",
+  "shard": "corpus/spine/kuairand_pure.parquet",
   "matched_rows": 2669838,
   "matched_fraction": 1.0,
   "rows_random_slice": 1186079,

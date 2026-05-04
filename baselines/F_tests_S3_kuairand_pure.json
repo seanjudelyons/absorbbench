@@ -1,5 +1,5 @@
 {
-  "shard": "/Users/seanlyons/Downloads/Phil Tech/corpus/spine/kuairand_pure.parquet",
+  "shard": "corpus/spine/kuairand_pure.parquet",
   "n_rows": 2622668,
   "S_definition": "S3 = -log2 P(tag-string, log10(video_duration_ms)//0.5 bucket)",
   "S3_unique_values": 74,

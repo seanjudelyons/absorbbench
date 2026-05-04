@@ -1,5 +1,5 @@
 {
-  "shard": "/Users/seanlyons/Downloads/Phil Tech/corpus/spine/kuairand_pure.parquet",
+  "shard": "corpus/spine/kuairand_pure.parquet",
   "n_rows": 2622668,
   "candidates": [
     {
